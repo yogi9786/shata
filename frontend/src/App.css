@@ -1,0 +1,7 @@
+/* App-level animation utilities */
+
+/* Selection color */
+::selection {
+  background-color: #f97316;
+  color: white;
+}
