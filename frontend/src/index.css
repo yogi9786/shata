@@ -1,5 +1,5 @@
-@import "tailwindcss";
 @import url('https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap');
+@import "tailwindcss";
 
 /* ─── Global ─── */
 html {
@@ -10,7 +10,7 @@ body {
   font-family: 'Geist', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: #ffffff;
+  background: #f8fafc;
   color: #0f172a;
 }
 
@@ -47,4 +47,90 @@ body {
 .no-scrollbar {
   -ms-overflow-style: none;
   scrollbar-width: none;
+}
+
+/* ─── Light Glassmorphism System ─── */
+.glass-panel-light {
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.05);
+}
+
+.glass-card-frosted {
+  background: rgba(255, 255, 255, 0.45);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.02);
+}
+
+.glass-card-light-hover {
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-card-light-hover:hover {
+  transform: translateY(-6px) scale(1.01);
+  background: rgba(255, 255, 255, 0.65);
+  border-color: rgba(249, 115, 22, 0.5);
+  box-shadow: 0 25px 50px -12px rgba(249, 115, 22, 0.18), 0 10px 20px -5px rgba(0, 0, 0, 0.06);
+}
+
+.glass-pill-light {
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.95);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.glass-shine-light {
+  position: relative;
+  overflow: hidden;
+}
+
+.glass-shine-light::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    45deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0) 40%,
+    rgba(255, 255, 255, 0.7) 50%,
+    rgba(255, 255, 255, 0) 60%,
+    transparent 100%
+  );
+  transform: rotate(30deg) translateY(-100%);
+  transition: transform 0.8s ease-in-out;
+}
+
+.glass-shine-light:hover::after {
+  transform: rotate(30deg) translateY(100%);
+}
+
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+}
+
+.animate-float {
+  animation: float-slow 4s ease-in-out infinite;
+}
+
+/* Swiper Custom Pagination */
+.events-showcase-swiper .swiper-pagination-bullet {
+  background: #cbd5e1;
+  opacity: 0.8;
+  transition: all 0.3s ease;
+}
+.events-showcase-swiper .swiper-pagination-bullet-active {
+  background: #ea580c;
+  width: 24px;
+  border-radius: 999px;
+  opacity: 1;
 }
