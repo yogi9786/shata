@@ -52,7 +52,7 @@ const services = [
 
 export default function ServicesGrid() {
   return (
-    <section id="services" className="relative px-4 sm:px-6 py-10 sm:py-16 bg-white/10 backdrop-blur-md text-slate-900 font-geist overflow-hidden border-y border-white/40 shadow-[0_20px_50px_-20px_rgba(0,0,0,0.03)]">
+    <section id="services" className="relative px-4 sm:px-6 py-10 sm:py-16 text-slate-900 font-geist overflow-hidden">
       {/* Glow background accent */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[350px] bg-gradient-to-r from-orange-200/20 via-amber-200/20 to-yellow-200/20 blur-[130px] pointer-events-none" />
 

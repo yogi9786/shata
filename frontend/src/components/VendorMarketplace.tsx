@@ -1,178 +1,210 @@
-import { useState, useEffect, useRef } from 'react'
-import { featuredEvents } from '../data/vendors'
+import { useState } from 'react'
+import { useEvents } from '../hooks/useEvents'
+import type { PageType } from '../App'
+import type { EventItem } from '../data/vendors'
 
-type Category = 'All' | 'Weddings' | 'Concerts' | 'Catering' | 'Photography' | 'Corporate' | 'Decor' | 'Galas'
+interface VendorMarketplaceProps {
+  onNavigate: (page: PageType, context?: string | number) => void
+}
 
-export default function VendorMarketplace() {
-  const [activeCategory, setActiveCategory] = useState<Category>('All')
+export default function VendorMarketplace({ onNavigate }: VendorMarketplaceProps) {
+  const { events: featuredEvents, loading } = useEvents()
   const [searchQuery, setSearchQuery] = useState('')
+  const [activeStory, setActiveStory] = useState<EventItem | null>(null)
 
   const filteredEvents = featuredEvents.filter((v) => {
-    const matchCat = activeCategory === 'All' || v.category.toLowerCase() === activeCategory.toLowerCase()
-    const matchSearch =
-      v.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      v.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      v.location.toLowerCase().includes(searchQuery.toLowerCase())
-    return matchCat && matchSearch
+    return v.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+           v.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+           v.location.toLowerCase().includes(searchQuery.toLowerCase())
   })
 
-  const categories: Category[] = ['All', 'Weddings', 'Catering', 'Photography', 'Concerts', 'Corporate', 'Decor', 'Galas']
-
   return (
-    <section id="vendors" className="px-4 sm:px-6 py-10 sm:py-16 bg-white/10 backdrop-blur-md border-y border-white/40 shadow-[0_20px_50px_-20px_rgba(0,0,0,0.03)] relative overflow-hidden text-slate-900 font-geist">
+    <section id="vendors" className="relative bg-[#FAFAFA] text-slate-900 font-geist pb-4 sm:pb-8">
+      
+      {/* ─── Premium Banner Section ─── */}
+      <div className="relative h-[300px] sm:h-[400px] w-full overflow-hidden flex flex-col justify-center px-4 sm:px-6">
+        <div className="absolute inset-0 z-0">
+          <img 
+            src="/marketplace-banner.png" 
+            alt="Event Booking Marketplace" 
+            className="w-full h-full object-cover object-center scale-105"
+          />
+          <div className="absolute inset-0 bg-slate-900/40 mix-blend-multiply" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#FAFAFA] via-transparent to-slate-900/60" />
+        </div>
 
-      <div className="max-w-7xl mx-auto relative z-10">
-        {/* header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 sm:mb-12">
-          <div>
-            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-orange-600 block mb-2">
-              Book Online
-            </span>
-            <h2 className="font-geist text-3xl sm:text-4xl font-medium text-slate-900 tracking-tight leading-[1.15]">
-              Verified Event Partners &amp; Production
-            </h2>
-          </div>
-          {/* search */}
-          <div className="mt-5 md:mt-0 relative w-full md:w-80">
+        <div className="relative z-10 max-w-4xl mx-auto w-full mt-8 sm:mt-12 text-center">
+          <span className="inline-block px-4 py-1.5 rounded-full bg-white/20 backdrop-blur-md text-white text-xs sm:text-sm font-bold uppercase tracking-[0.2em] mb-4 shadow-sm border border-white/30">
+            Event Booking Simplified
+          </span>
+          <h2 className="font-geist text-3xl sm:text-5xl font-medium text-white tracking-tight leading-[1.1] mb-6 drop-shadow-md">
+            Connecting You with Top Event Organizers
+          </h2>
+          
+          <div className="relative max-w-xl mx-auto group">
             <input
               type="text"
-              placeholder="Search vendors &amp; locations..."
+              placeholder="Search vendors & locations..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-10 pr-4 py-2.5 sm:py-3 bg-white/90 backdrop-blur-lg border border-slate-200/90 rounded-2xl text-xs sm:text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-orange-500/30 focus:border-orange-500 shadow-sm transition-all"
+              className="w-full pl-12 pr-6 py-3.5 sm:py-4 bg-white/95 backdrop-blur-md border border-white/40 rounded-full text-sm sm:text-base text-slate-900 placeholder-slate-500 focus:outline-none focus:ring-4 focus:ring-[#FF5A00]/30 shadow-xl transition-all"
             />
-            <svg className="w-4 h-4 sm:w-5 sm:h-5 text-slate-400 absolute left-3.5 top-3 sm:top-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+            <svg className="w-5 h-5 sm:w-6 sm:h-6 text-slate-400 absolute left-4 top-1/2 -translate-y-1/2 group-focus-within:text-[#FF5A00] transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
             </svg>
           </div>
         </div>
+      </div>
 
-        {/* category tabs — glass style */}
-        <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-8 sm:mb-10 overflow-x-auto no-scrollbar">
-          {categories.map((cat) => (
-            <button
-              key={cat}
-              onClick={() => setActiveCategory(cat)}
-              className={`px-3.5 sm:px-5 py-2 sm:py-2.5 rounded-xl text-xs font-semibold transition-all cursor-pointer backdrop-blur-sm whitespace-nowrap ${activeCategory === cat
-                  ? 'bg-gradient-to-r from-orange-600 to-amber-500 text-white shadow-md shadow-orange-500/20'
-                  : 'bg-slate-50 hover:bg-slate-100 text-slate-700 border border-slate-200/80 hover:border-orange-300 shadow-xs'
-                }`}
+      {/* ─── Stories Area ─── */}
+      <div className="max-w-7xl mx-auto relative z-10 -mt-2 sm:-mt-6">
+        
+        {/* Stories Horizontal Scroll */}
+        {loading ? (
+          <div className="py-20 flex flex-col items-center justify-center">
+            <div className="w-12 h-12 border-4 border-slate-200 border-t-[#FF5A00] rounded-full animate-spin mb-4 shadow-lg"></div>
+            <p className="text-slate-500 font-medium tracking-wide">Curating events...</p>
+          </div>
+        ) : (
+          <div className="flex overflow-x-auto snap-x snap-mandatory gap-4 sm:gap-6 pb-6 px-4 sm:px-6 w-full items-start mt-6 [&::-webkit-scrollbar]:h-2 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:bg-slate-200 [&::-webkit-scrollbar-thumb]:rounded-full hover:[&::-webkit-scrollbar-thumb]:bg-slate-300 transition-colors">
+            {filteredEvents.map((event) => (
+              <div 
+                key={event.id}
+                onClick={() => setActiveStory(event)}
+                className="flex flex-col items-center gap-1.5 sm:gap-2 cursor-pointer flex-shrink-0 group snap-center w-[72px] sm:w-[84px]"
+              >
+                {/* IG Story Ring */}
+                <div className="w-[72px] h-[72px] sm:w-[84px] sm:h-[84px] rounded-full p-[2.5px] bg-gradient-to-tr from-yellow-400 via-[#FF5A00] to-pink-500 shadow-sm flex-shrink-0 transition-shadow duration-300 group-hover:shadow-md">
+                  <div className="w-full h-full rounded-full border-[2.5px] border-[#FAFAFA] overflow-hidden bg-slate-100">
+                    <img 
+                      src={event.image} 
+                      alt={event.title} 
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
+                    />
+                  </div>
+                </div>
+                {/* Event Name */}
+                <span className="text-[10px] sm:text-xs text-slate-700 font-medium text-center leading-tight line-clamp-2 w-full px-0.5 group-hover:text-[#FF5A00] transition-colors">
+                  {event.title}
+                </span>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {/* Empty State */}
+        {!loading && filteredEvents.length === 0 && (
+          <div className="text-center py-24 mx-4 sm:mx-0 bg-white border border-slate-200/80 rounded-[32px] shadow-sm mt-4">
+            <div className="w-16 h-16 bg-slate-50 rounded-full flex items-center justify-center mx-auto mb-4 border border-slate-100">
+              <svg className="w-8 h-8 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+              </svg>
+            </div>
+            <h4 className="font-geist text-lg font-semibold text-slate-900 mb-2">No Stories Found</h4>
+            <p className="text-slate-500 text-sm max-w-xs mx-auto">Try exploring different search terms.</p>
+            <button 
+              onClick={() => { setSearchQuery(''); }}
+              className="mt-6 px-6 py-2.5 bg-slate-900 text-white rounded-full text-sm font-medium hover:bg-slate-800 transition-colors cursor-pointer"
             >
-              {cat}
+              Clear Search
             </button>
-          ))}
-        </div>
-
-        {/* vendor cards grid - Mobile 2 Columns */}
-        <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-7">
-          {filteredEvents.map((event, index) => (
-            <EventMarketCard key={event.id} event={event} index={index} />
-          ))}
-        </div>
-
-        {/* empty state */}
-        {filteredEvents.length === 0 && (
-          <div className="text-center py-16 bg-white/80 backdrop-blur-xl border border-slate-200/80 rounded-2xl shadow-sm">
-            <svg className="w-10 h-10 text-slate-400 mx-auto mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-            <h4 className="font-geist text-base font-semibold text-slate-900">No Services Found</h4>
-            <p className="text-slate-500 text-xs mt-1">Try searching for other terms or choose another service tab.</p>
           </div>
         )}
       </div>
-    </section>
-  )
-}
 
-/* ─── Individual Event Card with Translucent Glass Blur Background ─── */
-
-interface EventMarketCardProps {
-  event: (typeof featuredEvents)[number]
-  index: number
-}
-
-function EventMarketCard({ event, index }: EventMarketCardProps) {
-  const ref = useRef<HTMLDivElement>(null)
-  const [visible, setVisible] = useState(false)
-
-  useEffect(() => {
-    const el = ref.current
-    if (!el) return
-    const obs = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setVisible(true)
-          obs.unobserve(el)
-        }
-      },
-      { threshold: 0.12, rootMargin: '0px 0px -30px 0px' }
-    )
-    obs.observe(el)
-    return () => obs.disconnect()
-  }, [])
-
-  return (
-    <div
-      ref={ref}
-      className="bg-white/45 backdrop-blur-2xl border border-white/80 rounded-2xl sm:rounded-3xl overflow-hidden shadow-lg shadow-slate-200/40 hover:shadow-2xl hover:border-orange-300 transition-all duration-500 flex flex-col group glass-shine-light"
-      style={{
-        opacity: visible ? 1 : 0,
-        transform: visible
-          ? 'scale(1) translateY(0)'
-          : 'scale(0.9) translateY(24px)',
-        transition: `opacity 0.6s cubic-bezier(0.16,1,0.3,1) ${index * 0.08}s, transform 0.6s cubic-bezier(0.16,1,0.3,1) ${index * 0.08}s`,
-      }}
-    >
-      {/* Image */}
-      <div className="relative h-36 sm:h-56 w-full overflow-hidden bg-slate-900">
-        <img
-          src={event.image}
-          alt={event.title}
-          className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-700"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/50 via-transparent to-transparent pointer-events-none" />
-
-        {/* Tag badge */}
-        <div className="absolute top-2.5 left-2.5 sm:top-4 sm:left-4 bg-slate-900/85 backdrop-blur-md text-amber-300 px-2 py-0.5 sm:px-3 sm:py-1 rounded-lg sm:rounded-xl text-[9px] sm:text-xs font-semibold border border-amber-500/20 truncate max-w-[60%]">
-          {event.tag}
-        </div>
-
-        {/* Rating badge */}
-        <div className="absolute top-2.5 right-2.5 sm:top-4 sm:right-4 bg-white/95 backdrop-blur-md px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-lg sm:rounded-xl text-[10px] sm:text-xs font-semibold text-slate-900 flex items-center gap-1 shadow-sm">
-          <svg className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-amber-500 fill-amber-500" viewBox="0 0 20 20">
-            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-          </svg>
-          <span>{event.rating}</span>
-        </div>
-      </div>
-
-      {/* Content Translucent Glass Body */}
-      <div className="p-3 sm:p-5 flex-1 flex flex-col justify-between gap-3 sm:gap-4 bg-white/50 backdrop-blur-2xl border-t border-white/60">
-        <div>
-          <div className="flex items-center gap-1 text-[10px] sm:text-[11px] font-semibold text-orange-600 mb-1.5 truncate">
-            <svg className="w-3.5 h-3.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-              <path strokeLinecap="round" strokeLinejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+      {/* ─── Story Viewer Modal ─── */}
+      {activeStory && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/95 backdrop-blur-sm p-0 sm:p-4 animate-in fade-in duration-300">
+          
+          {/* Close Area (clicking outside) */}
+          <div className="absolute inset-0 z-0 cursor-pointer" onClick={() => setActiveStory(null)} />
+          
+          {/* Close Button */}
+          <button 
+            onClick={() => setActiveStory(null)} 
+            className="absolute top-4 right-4 sm:top-6 sm:right-6 text-white z-50 w-10 h-10 flex items-center justify-center bg-white/10 hover:bg-white/20 rounded-full transition-colors cursor-pointer"
+          >
+            <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
             </svg>
-            <span className="truncate">{event.location}</span>
-          </div>
-          <h4 className="font-geist text-xs sm:text-base font-semibold text-slate-900 group-hover:text-orange-600 transition-colors leading-snug line-clamp-2">
-            {event.title}
-          </h4>
-        </div>
-
-        {/* Footer */}
-        <div className="pt-2 sm:pt-4 border-t border-slate-200/60 flex flex-col sm:flex-row sm:items-center justify-between gap-1.5">
-          <div>
-            <span className="text-[8px] sm:text-[10px] text-slate-400 block uppercase font-semibold">Pricing</span>
-            <span className="text-xs sm:text-sm font-bold text-slate-900 truncate block">{event.price}</span>
-          </div>
-          <button className="w-full sm:w-auto px-2.5 py-1.5 sm:px-4 sm:py-2.5 bg-gradient-to-r from-orange-600 to-amber-500 hover:from-orange-700 hover:to-amber-600 text-white rounded-xl text-[10px] sm:text-xs font-semibold transition-all cursor-pointer shadow-sm">
-            Book Event
           </button>
+          
+          {/* Story Card */}
+          <div className="relative w-full h-full sm:max-w-md sm:h-[85vh] sm:rounded-[2rem] overflow-hidden shadow-2xl flex flex-col z-10 bg-slate-900 animate-in slide-in-from-bottom-8 sm:slide-in-from-bottom-0 sm:zoom-in-95 duration-300">
+            
+            <img 
+              src={activeStory.image} 
+              alt={activeStory.title} 
+              className="absolute inset-0 w-full h-full object-cover opacity-80" 
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-900/50 to-slate-900/20" />
+
+            {/* Simulated Story Progress Bar */}
+            <div className="absolute top-4 inset-x-4 flex gap-1 z-10">
+              <div className="h-1 flex-1 bg-white/30 rounded-full overflow-hidden">
+                <div className="h-full bg-white w-full animate-[progress_5s_linear]" />
+              </div>
+            </div>
+            
+            {/* Header info (Provider/Category) */}
+            <div className="absolute top-8 left-4 flex items-center gap-2 z-10">
+               <div className="w-8 h-8 rounded-full border border-white/50 overflow-hidden bg-slate-800 flex-shrink-0">
+                  <img src={activeStory.image} className="w-full h-full object-cover" alt="" />
+               </div>
+               <span className="text-white text-sm font-semibold shadow-sm">{activeStory.category}</span>
+               <span className="text-white/60 text-xs">• 2h</span>
+            </div>
+            
+            {/* Content Bottom */}
+            <div className="relative z-10 p-6 mt-auto flex flex-col pb-10 sm:pb-8">
+              {activeStory.badge && (
+                <span className="inline-block self-start px-3 py-1 bg-white/20 backdrop-blur-md text-white text-xs font-bold uppercase tracking-wider rounded-lg mb-3">
+                  {activeStory.badge}
+                </span>
+              )}
+              
+              <h2 className="text-3xl font-bold text-white mb-2 leading-tight drop-shadow-md">
+                {activeStory.title}
+              </h2>
+              
+              <div className="flex items-center gap-2 text-white/80 text-sm mb-4">
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+                <span>{activeStory.location}</span>
+                <span className="mx-2 text-white/40">•</span>
+                <span className="text-[#FF5A00] font-bold">★ {activeStory.rating.toFixed(1)}</span>
+              </div>
+              
+              <p className="text-white/80 text-sm line-clamp-3 mb-8">
+                {activeStory.description}
+              </p>
+              
+              <div className="flex gap-3">
+                <button 
+                  onClick={() => {
+                    setActiveStory(null);
+                    onNavigate('event-details', activeStory.id);
+                  }} 
+                  className="flex-1 py-3.5 bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/20 text-white rounded-full font-bold transition-colors cursor-pointer"
+                >
+                  View Details
+                </button>
+                <button 
+                  onClick={() => {
+                    setActiveStory(null);
+                    onNavigate('booking', activeStory.title);
+                  }} 
+                  className="flex-1 py-3.5 bg-[#FF5A00] hover:bg-[#E04F00] text-white rounded-full font-bold shadow-[0_0_20px_rgba(255,90,0,0.3)] transition-all cursor-pointer"
+                >
+                  Book Now
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
+      )}
+    </section>
   )
 }

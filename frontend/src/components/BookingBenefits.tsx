@@ -1,60 +1,85 @@
 const benefits = [
   {
-    title: 'Secure & Verified',
+    number: '01',
+    title: 'Curated Excellence',
     description:
-      'Every caterer, photographer, and decorator undergoes a rigorous 4-step quality audit to verify portfolios, licenses, and ratings.',
-    icon: (
-      <svg className="w-6 h-6 text-orange-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-      </svg>
-    ),
+      'Access an exclusive network of elite vendors, meticulously vetted for quality, reliability, and sheer brilliance in execution.',
+    gradient: 'from-orange-500 to-rose-500',
   },
   {
-    title: 'No Hidden Commissions',
+    number: '02',
+    title: 'Bespoke Curation',
     description:
-      'Get direct access to vendor rate cards. We guarantee absolute transparency. What you see is exactly what you pay.',
-    icon: (
-      <svg className="w-6 h-6 text-amber-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-      </svg>
-    ),
+      'Every event is a unique masterpiece. We don\'t just book; we design, coordinate, and perfect every detail to your vision.',
+    gradient: 'from-amber-400 to-orange-500',
   },
   {
-    title: 'Free Booking Alterations',
+    number: '03',
+    title: 'Absolute Transparency',
     description:
-      'Plans changed? No worries. Enjoy free reschedule options and direct replacement guarantees up to 14 days before your event.',
-    icon: (
-      <svg className="w-6 h-6 text-yellow-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-      </svg>
-    ),
+      'No hidden fees, no unexpected surprises. Experience direct vendor pricing with comprehensive event insurance and zero-stress protection.',
+    gradient: 'from-yellow-400 to-amber-500',
   },
 ]
 
-export default function BookingBenefits() {
-  return (
-    <section id="benefits" className="px-4 sm:px-6 py-10 sm:py-16 bg-white/10 backdrop-blur-md border-y border-white/40 shadow-[0_20px_50px_-20px_rgba(0,0,0,0.03)] font-geist relative">
-      <div className="max-w-7xl mx-auto">
-        {/* header */}
-        <div className="text-center mb-12 sm:mb-14">
-          <span className="text-xs font-semibold uppercase tracking-[0.2em] text-orange-600 block mb-2.5">
-            Why Choose Us
-          </span>
-          <h2 className="font-geist text-3xl sm:text-4xl font-medium text-slate-900 tracking-tight leading-[1.15]">
-            Book with Confidence
-          </h2>
-        </div>
+interface BookingBenefitsProps {
+  hideHeader?: boolean
+}
 
-        {/* cards grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-8">
+export default function BookingBenefits({ hideHeader }: BookingBenefitsProps = {}) {
+  return (
+    <section id="benefits" className="px-4 sm:px-6 py-10 sm:py-16 font-geist relative">
+      {/* Abstract Background Elements (Light) */}
+      <div className="absolute top-0 right-0 w-full h-full pointer-events-none z-0 opacity-40">
+        <div className="absolute top-[-20%] right-[-10%] w-[300px] h-[300px] rounded-full bg-gradient-to-bl from-orange-300/30 to-amber-200/20 blur-[100px]" />
+        <div className="absolute bottom-[-20%] left-[-10%] w-[400px] h-[400px] rounded-full bg-gradient-to-tr from-rose-300/20 to-orange-300/20 blur-[120px]" />
+      </div>
+
+      <div className="max-w-7xl mx-auto relative z-10">
+        {/* header */}
+        {!hideHeader && (
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
+            <div className="max-w-2xl">
+              <span className="text-xs font-semibold uppercase tracking-[0.25em] text-orange-600 block mb-2.5">
+                The Shata Advantage
+              </span>
+              <h2 className="font-geist text-3xl sm:text-4xl font-semibold text-slate-900 tracking-tight leading-[1.1]">
+                Elevate Your <br className="hidden sm:block" />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-600 to-amber-500">Experience.</span>
+              </h2>
+            </div>
+            <p className="text-slate-500 text-sm max-w-sm md:text-right font-medium leading-relaxed">
+              Why visionary clients trust us to orchestrate their most important, unforgettable moments.
+            </p>
+          </div>
+        )}
+
+        {/* Dynamic Cards Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
           {benefits.map((b, i) => (
-            <div key={i} className="flex gap-4 group p-5 rounded-3xl bg-white/40 border border-white/60 hover:border-orange-400/60 shadow-lg shadow-slate-200/40 backdrop-blur-2xl transition-all glass-shine-light">
-              <div className="w-12 h-12 rounded-2xl bg-orange-50 group-hover:bg-orange-600 group-hover:text-white flex-shrink-0 flex items-center justify-center text-orange-600 transition-colors duration-300 shadow-xs">
-                {b.icon}
+            <div 
+              key={i} 
+              className="group relative p-5 sm:p-6 rounded-3xl bg-white/40 border border-white/60 hover:border-orange-400/60 shadow-lg shadow-slate-200/40 backdrop-blur-2xl transition-all duration-500 overflow-hidden flex flex-col justify-end glass-shine-light"
+            >
+              {/* Giant Background Number */}
+              <div className="absolute top-2 right-4 text-[80px] font-bold leading-none text-slate-900/5 group-hover:text-slate-900/10 transition-colors duration-500 pointer-events-none font-geist tracking-tighter">
+                {b.number}
               </div>
-              <div>
-                <h4 className="font-geist text-base font-semibold text-slate-900 mb-1.5">{b.title}</h4>
-                <p className="text-slate-500 text-xs leading-relaxed font-normal">{b.description}</p>
+
+              {/* Glowing Accent */}
+              <div className={`absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r ${b.gradient} transform scale-x-0 group-hover:scale-x-100 transition-transform duration-700 origin-left`} />
+
+              <div className="relative z-10">
+                <div className={`w-10 h-10 mb-4 rounded-xl bg-gradient-to-br ${b.gradient} flex items-center justify-center shadow-md`}>
+                  <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                  </svg>
+                </div>
+                
+                <h4 className="font-geist text-lg font-bold text-slate-900 mb-2 tracking-tight">{b.title}</h4>
+                <p className="text-slate-600 text-xs sm:text-sm leading-relaxed font-normal group-hover:text-slate-800 transition-colors duration-300">
+                  {b.description}
+                </p>
               </div>
             </div>
           ))}

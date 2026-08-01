@@ -1,13 +1,15 @@
 import { useState } from 'react'
 import bgTopBlue from '../assets/leaf1.png'
 import bgTopBlueMobile from '../assets/Leafporteral.png'
+import type { PageType } from '../App'
 
 interface HeroSectionProps {
   scrollY: number
   progress: number
+  onNavigate: (page: PageType, context?: string | number) => void
 }
 
-export default function HeroSection({ progress }: HeroSectionProps) {
+export default function HeroSection({ progress, onNavigate }: HeroSectionProps) {
   const [searchQuery, setSearchQuery] = useState('')
 
   // Smooth scroll scale transformation (0.95 → 1.10)
@@ -23,7 +25,7 @@ export default function HeroSection({ progress }: HeroSectionProps) {
   }
 
   return (
-    <section id="hero" className="relative min-h-[110vh] pt-48 sm:pt-28 lg:pt-56 2xl:pt-60 pb-12 overflow-hidden bg-white">
+    <section id="hero" className="relative min-h-0 pt-48 sm:pt-28 lg:pt-56 2xl:pt-60 pb-4 overflow-hidden bg-transparent">
       {/* ── TOP BLUE BACKGROUND IMAGE ── */}
       {/* Mobile background */}
       <img
@@ -50,7 +52,7 @@ export default function HeroSection({ progress }: HeroSectionProps) {
           }}
         >
           {/* 1. Rating Pill */}
-          <div className="inline-flex items-center gap-1.5 px-2 py-1 sm:px-3 sm:py-1.5 rounded-full bg-white border border-sky-200/60 shadow-xs mb-4 sm:mb-5 2xl:mb-6 lg:-mt-4 2xl:-mt-8">
+          <div className="inline-flex items-center gap-1.5 px-2 py-1 sm:px-3 sm:py-1.5 rounded-full bg-white border border-sky-200/60 shadow-xs mb-2 sm:mb-3 2xl:mb-4 lg:-mt-4 2xl:-mt-8">
             <div className="flex -space-x-1.5 overflow-hidden">
               <img className="inline-block h-4 w-4 sm:h-5 sm:w-5 rounded-full ring-2 ring-white object-cover" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80" alt="User" />
               <img className="inline-block h-4 w-4 sm:h-5 sm:w-5 rounded-full ring-2 ring-white object-cover" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&auto=format&fit=crop&q=80" alt="User" />
@@ -75,7 +77,10 @@ export default function HeroSection({ progress }: HeroSectionProps) {
           </h1>
 
           {/* Mobile Only: Book Event Glass Button */}
-          <button className="sm:hidden mt-3 mb-2 px-6 py-2.5 rounded-xl bg-white/40 backdrop-blur-md border border-white/60 text-slate-900 font-bold text-sm shadow-sm flex items-center gap-2 active:scale-95 transition-transform">
+          <button 
+            onClick={() => onNavigate('booking')}
+            className="sm:hidden mt-3 mb-2 px-6 py-2.5 rounded-xl bg-white/40 backdrop-blur-md border border-white/60 text-slate-900 font-bold text-sm shadow-sm flex items-center gap-2 active:scale-95 transition-transform cursor-pointer focus:outline-none"
+          >
             Book an Event
             <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
               <path d="M5 12h14M12 5l7 7-7 7" />
@@ -115,7 +120,7 @@ export default function HeroSection({ progress }: HeroSectionProps) {
           }}
         >
           {/* Grid Image Behind Search Bar */}
-          <div className="relative w-full sm:w-[95%] lg:w-[65vw] max-w-5xl lg:max-w-4xl 2xl:max-w-5xl mx-auto lg:rounded-2xl overflow-hidden z-10 lg:-mt-8">
+          <div className="relative w-full sm:w-[95%] lg:w-[65vw] 2xl:w-[50vw] max-w-5xl lg:max-w-4xl 2xl:max-w-4xl mx-auto lg:rounded-2xl overflow-hidden z-10 lg:-mt-8">
             {/* Mobile / Tablet Image */}
             <img
               src={import.meta.url ? new URL('../assets/event-hero1.png', import.meta.url).href : ''}

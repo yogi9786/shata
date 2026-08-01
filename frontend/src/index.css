@@ -19,6 +19,11 @@ body {
   font-family: 'Geist', system-ui, -apple-system, sans-serif;
 }
 
+/* ─── Theme Font Utility (Jakarta) ─── */
+.font-jakarta {
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+}
+
 /* ─── Typography & Selection ─── */
 ::selection {
   background-color: #ea580c;
