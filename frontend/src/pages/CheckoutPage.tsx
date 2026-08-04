@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import logoSvg from '../assets/logo.svg'
 import type { PageType, UserProfile } from '../App'
+import { API_BASE_URL } from '../config'
 
 interface CheckoutPageProps {
   bookingDetails: {
@@ -112,7 +113,7 @@ export default function CheckoutPage({ bookingDetails, onNavigate, onBookingConf
     }
 
     try {
-      const response = await fetch('http://localhost:8000/api/bookings', {
+      const response = await fetch(`${API_BASE_URL}/api/bookings`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)

@@ -2,6 +2,7 @@ import { useState } from 'react'
 import logoSvg from '../assets/logo.svg'
 import type { PageType } from '../App'
 import type { UserProfile } from '../App'
+import { API_BASE_URL } from '../config'
 
 interface HeaderProps {
   scrollY: number
@@ -49,7 +50,7 @@ export default function Header({ scrollY, currentPage, onNavigate, currentUser, 
         if (!authEmail.trim() || !authPassword.trim()) {
           return setAuthError('Please fill in all fields.')
         }
-        const response = await fetch('http://localhost:8000/api/auth/login', {
+        const response = await fetch(`${API_BASE_URL}/api/auth/login`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -70,7 +71,7 @@ export default function Header({ scrollY, currentPage, onNavigate, currentUser, 
         if (!authName.trim() || !authEmail.trim() || !authPhone.trim() || !authPassword.trim()) {
           return setAuthError('Please fill in all fields.')
         }
-        const response = await fetch('http://localhost:8000/api/auth/signup', {
+        const response = await fetch(`${API_BASE_URL}/api/auth/signup`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

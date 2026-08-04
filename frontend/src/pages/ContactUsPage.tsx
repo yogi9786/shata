@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import type { PageType } from '../App'
+import { API_BASE_URL } from '../config'
 
 interface ContactUsPageProps {
   onNavigate?: (page: PageType, context?: string | number) => void
@@ -25,7 +26,7 @@ export default function ContactUsPage({}: ContactUsPageProps) {
     setErrorMessage('')
 
     try {
-      const response = await fetch('http://localhost:8000/api/contact', {
+      const response = await fetch(`${API_BASE_URL}/api/contact`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData)
