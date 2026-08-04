@@ -8,7 +8,103 @@
     <title>Shata — India's No.1 Event Booking Platform</title>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <!-- Premium Preloader -->
+      <div id="preloader" style="
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #fafafa;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      ">
+        <div style="
+          position: relative;
+          width: 96px;
+          height: 96px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        ">
+          <!-- Spinning Gradient Arc -->
+          <div style="
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            border: 2px solid transparent;
+            border-top-color: #f97316;
+            border-right-color: #f59e0b;
+            animation: spin 1s linear infinite;
+          "></div>
+          <!-- Reverse Sub-Ring -->
+          <div style="
+            position: absolute;
+            inset: 8px;
+            border-radius: 50%;
+            border: 1px solid transparent;
+            border-bottom-color: #f43f5e;
+            border-left-color: #fb923c;
+            animation: spin-reverse 1.5s linear infinite;
+          "></div>
+          <!-- Pulsing Glow -->
+          <div style="
+            position: absolute;
+            inset: 12px;
+            background: radial-gradient(circle, rgba(249,115,22,0.1) 0%, rgba(244,63,94,0.05) 100%);
+            border-radius: 50%;
+            animation: pulse-glow 2s ease-in-out infinite;
+          "></div>
+          <!-- Pulsing Logo -->
+          <img src="/favicon.svg" alt="Shata Logo" style="
+            height: 32px;
+            width: auto;
+            object-fit: contain;
+            position: relative;
+            z-index: 10;
+            animation: pulse-logo 2s ease-in-out infinite;
+          " />
+        </div>
+        <p style="
+          margin-top: 20px;
+          font-size: 11px;
+          font-weight: 700;
+          color: #94a3b8;
+          text-transform: uppercase;
+          letter-spacing: 0.25em;
+          animation: pulse-text 2.5s ease-in-out infinite;
+        ">Loading Shata...</p>
+      </div>
+
+      <!-- CSS Animations -->
+      <style>
+        @keyframes spin {
+          0% { transform: rotate(0deg); }
+          100% { transform: rotate(360deg); }
+        }
+        @keyframes spin-reverse {
+          0% { transform: rotate(360deg); }
+          100% { transform: rotate(0deg); }
+        }
+        @keyframes pulse-glow {
+          0%, 100% { transform: scale(1); opacity: 0.4; }
+          50% { transform: scale(1.15); opacity: 0.8; }
+        }
+        @keyframes pulse-logo {
+          0%, 100% { transform: scale(1); opacity: 0.85; }
+          50% { transform: scale(1.08); opacity: 1; filter: drop-shadow(0 4px 6px rgba(249,115,22,0.15)); }
+        }
+        @keyframes pulse-text {
+          0%, 100% { opacity: 0.5; }
+          50% { opacity: 1; }
+        }
+      </style>
+    </div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

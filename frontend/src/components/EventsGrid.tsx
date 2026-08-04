@@ -1,6 +1,7 @@
 import { useState, useMemo } from 'react'
 import { useEvents } from '../hooks/useEvents'
 import type { PageType } from '../App'
+import LogoLoader from './LogoLoader'
 
 interface EventsGridProps {
   onNavigate: (page: PageType, context?: string | number) => void
@@ -146,10 +147,7 @@ export default function EventsGrid({ onNavigate, hideHeader }: EventsGridProps) 
 
         {/* ── Mobile 2-Column Responsive Glass Cards Grid ── */}
         {loading ? (
-          <div className="py-20 text-center">
-            <div className="inline-block animate-spin w-8 h-8 border-4 border-orange-500 border-t-transparent rounded-full mb-4"></div>
-            <p className="text-slate-500 font-medium">Loading events...</p>
-          </div>
+          <LogoLoader text="Loading Experiences..." />
         ) : (
           <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-6">
             {filteredEvents.map((event) => (

@@ -2,6 +2,7 @@ import { useState, useRef } from 'react'
 import { useEvents } from '../hooks/useEvents'
 import type { PageType } from '../App'
 import type { EventItem } from '../data/vendors'
+import LogoLoader from './LogoLoader'
 
 interface VendorMarketplaceProps {
   onNavigate: (page: PageType, context?: string | number) => void
@@ -78,10 +79,7 @@ export default function VendorMarketplace({ onNavigate }: VendorMarketplaceProps
         
         {/* Stories Horizontal Scroll */}
         {loading ? (
-          <div className="py-20 flex flex-col items-center justify-center">
-            <div className="w-12 h-12 border-4 border-slate-200 border-t-[#FF5A00] rounded-full animate-spin mb-4 shadow-lg"></div>
-            <p className="text-slate-500 font-medium tracking-wide">Curating events...</p>
-          </div>
+          <LogoLoader text="Curating events..." />
         ) : (
           <div className="relative group/nav mt-6">
             <div 

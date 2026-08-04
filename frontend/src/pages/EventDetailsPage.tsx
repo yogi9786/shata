@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useEvents } from '../hooks/useEvents';
 import type { PageType } from '../App';
+import LogoLoader from '../components/LogoLoader';
 
 interface EventDetailsPageProps {
   eventId: number;
@@ -19,8 +20,7 @@ export default function EventDetailsPage({ eventId, onNavigate }: EventDetailsPa
   if (loading) {
     return (
       <div className="pt-32 pb-24 text-center min-h-[60vh] flex flex-col items-center justify-center">
-        <div className="inline-block animate-spin w-10 h-10 border-4 border-orange-500 border-t-transparent rounded-full mb-4"></div>
-        <p className="text-slate-500 font-medium text-lg">Loading event details...</p>
+        <LogoLoader text="Loading Event Details..." size="lg" />
       </div>
     );
   }
