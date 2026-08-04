@@ -40,27 +40,6 @@ export default function Header({ scrollY, currentPage, onNavigate, currentUser, 
       onNavigate(targetPage)
     }
   }
-
-  const handleAnchorClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    e.preventDefault()
-    setIsMobileMenuOpen(false)
-    const elementId = href.replace('#', '')
-    if (currentPage !== 'home') {
-      onNavigate('home')
-      setTimeout(() => {
-        const element = document.getElementById(elementId)
-        if (element) {
-          element.scrollIntoView({ behavior: 'smooth' })
-        }
-      }, 50)
-    } else {
-      const element = document.getElementById(elementId)
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' })
-      }
-    }
-  }
-
   const handleAuthSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setAuthError('')
