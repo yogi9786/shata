@@ -8,22 +8,22 @@ interface ClientStory {
   category: string;
   location: string;
   rating: number;
-  seed: string;
+  imageUrl: string;
   reviewerName: string;
   reviewText: string;
   avatarUrl: string;
 }
 
 const clientStories: ClientStory[] = [
-  { id: 1, title: "Royal Mandap Wedding", category: "Wedding", location: "Udaipur", rating: 4.9, seed: "rosewater-wedding", reviewerName: "Rohan & Priya", reviewText: "Absolutely magical! The Shata team brought our floral mandap vision to life flawlessly.", avatarUrl: "https://randomuser.me/api/portraits/women/43.jpg" },
-  { id: 2, title: "Bollywood Sangeet Night", category: "Sangeet", location: "Mumbai", rating: 4.8, seed: "midnight-sixteen", reviewerName: "Ananya S.", reviewText: "The best night of my life! The lighting, stage, and DJ were exactly what I wanted.", avatarUrl: "https://randomuser.me/api/portraits/women/24.jpg" },
-  { id: 3, title: "Lakeside Roka Ceremony", category: "Engagement", location: "Kerala", rating: 5.0, seed: "blush-engagement", reviewerName: "Karan R.", reviewText: "A breathtaking setup. Booking the venue and vendors through Shata was so seamless.", avatarUrl: "https://randomuser.me/api/portraits/men/43.jpg" },
-  { id: 4, title: "Corporate Tech Summit", category: "Corporate", location: "Bengaluru", rating: 4.7, seed: "skyline-launch", reviewerName: "Vikram M., CEO", reviewText: "Incredibly professional. Our new product was unveiled in absolute style and luxury.", avatarUrl: "https://randomuser.me/api/portraits/men/27.jpg" },
-  { id: 5, title: "Traditional Godh Bharai", category: "Baby Shower", location: "Jaipur", rating: 4.9, seed: "peony-shower", reviewerName: "Neha W.", reviewText: "Such a beautiful, stress-free day! The marigold decor was exactly like my Pinterest board.", avatarUrl: "https://randomuser.me/api/portraits/women/30.jpg" },
-  { id: 6, title: "Beachside Anniversary Gala", category: "Anniversary", location: "Goa", rating: 4.8, seed: "velvet-gala", reviewerName: "Arjun & Meera", reviewText: "A night we will cherish forever. The ocean view setup was orchestrated perfectly.", avatarUrl: "https://randomuser.me/api/portraits/men/53.jpg" },
-  { id: 7, title: "Sufi Music Festival", category: "Festival", location: "Delhi", rating: 4.6, seed: "orchard-festival", reviewerName: "Rahul K.", reviewText: "Rustic, chic, and perfectly organized. The live food counters were a huge hit!", avatarUrl: "https://randomuser.me/api/portraits/men/11.jpg" },
-  { id: 8, title: "Grand Palace Reception", category: "Wedding", location: "Jodhpur", rating: 5.0, seed: "silk-reception", reviewerName: "Aditi & Sahil", reviewText: "An elegant fusion of modern luxury and tradition. Shata made our dream a reality.", avatarUrl: "https://randomuser.me/api/portraits/women/59.jpg" },
-  { id: 9, title: "Golden Hour Cocktail Soiree", category: "Corporate", location: "Pune", rating: 4.7, seed: "amber-soiree", reviewerName: "Sneha L.", reviewText: "The sunset lighting and high-end cocktails set the perfect networking vibe.", avatarUrl: "https://randomuser.me/api/portraits/women/85.jpg" },
+  { id: 1, title: "Royal Mandap Wedding", category: "Wedding", location: "Udaipur", rating: 4.9, imageUrl: "/images/wedding.png", reviewerName: "Rohan & Priya", reviewText: "Absolutely magical! The Shata team brought our floral mandap vision to life flawlessly.", avatarUrl: "https://randomuser.me/api/portraits/women/43.jpg" },
+  { id: 2, title: "Bollywood Sangeet Night", category: "Sangeet", location: "Mumbai", rating: 4.8, imageUrl: "/images/music_festival.png", reviewerName: "Ananya S.", reviewText: "The best night of my life! The lighting, stage, and DJ were exactly what I wanted.", avatarUrl: "https://randomuser.me/api/portraits/women/24.jpg" },
+  { id: 3, title: "Lakeside Roka Ceremony", category: "Engagement", location: "Kerala", rating: 5.0, imageUrl: "/images/engagement.png", reviewerName: "Karan R.", reviewText: "A breathtaking setup. Booking the venue and vendors through Shata was so seamless.", avatarUrl: "https://randomuser.me/api/portraits/men/43.jpg" },
+  { id: 4, title: "Corporate Tech Summit", category: "Corporate", location: "Bengaluru", rating: 4.7, imageUrl: "/images/corporate_summit.png", reviewerName: "Vikram M., CEO", reviewText: "Incredibly professional. Our new product was unveiled in absolute style and luxury.", avatarUrl: "https://randomuser.me/api/portraits/men/27.jpg" },
+  { id: 5, title: "Traditional Godh Bharai", category: "Baby Shower", location: "Jaipur", rating: 4.9, imageUrl: "/images/indian_baby_shower.png", reviewerName: "Neha W.", reviewText: "Such a beautiful, stress-free day! The marigold decor was exactly like my Pinterest board.", avatarUrl: "https://randomuser.me/api/portraits/women/30.jpg" },
+  { id: 6, title: "Beachside Anniversary Gala", category: "Anniversary", location: "Goa", rating: 4.8, imageUrl: "/images/luxury_beach_gala.png", reviewerName: "Arjun & Meera", reviewText: "A night we will cherish forever. The ocean view setup was orchestrated perfectly.", avatarUrl: "https://randomuser.me/api/portraits/men/53.jpg" },
+  { id: 7, title: "Sufi Music Festival", category: "Festival", location: "Delhi", rating: 4.6, imageUrl: "/images/indian_concert.png", reviewerName: "Rahul K.", reviewText: "Rustic, chic, and perfectly organized. The live food counters were a huge hit!", avatarUrl: "https://randomuser.me/api/portraits/men/11.jpg" },
+  { id: 8, title: "Grand Palace Reception", category: "Wedding", location: "Jodhpur", rating: 5.0, imageUrl: "/images/royal_wedding.png", reviewerName: "Aditi & Sahil", reviewText: "An elegant fusion of modern luxury and tradition. Shata made our dream a reality.", avatarUrl: "https://randomuser.me/api/portraits/women/59.jpg" },
+  { id: 9, title: "Golden Hour Cocktail Soiree", category: "Corporate", location: "Pune", rating: 4.7, imageUrl: "/images/corporate_event.png", reviewerName: "Sneha L.", reviewText: "The sunset lighting and high-end cocktails set the perfect networking vibe.", avatarUrl: "https://randomuser.me/api/portraits/women/85.jpg" },
 ];
 
 interface EventShowcaseCarouselProps {
@@ -78,8 +78,13 @@ export default function EventShowcaseCarousel({ onNavigate }: EventShowcaseCarou
 
   return (
     <section id="showcase-carousel" className="relative px-3 sm:px-6 lg:px-8 py-10 sm:py-16 overflow-hidden font-geist">
-      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[380px] bg-gradient-to-r from-orange-400/20 via-amber-300/20 to-yellow-300/15 rounded-full blur-[130px] pointer-events-none -z-10" />
-      <div className="absolute -bottom-10 right-10 w-72 h-72 bg-orange-300/20 rounded-full blur-[110px] pointer-events-none -z-10" />
+      {/* ── Professional Section Glass Blur Background Layers ── */}
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[750px] h-[750px] bg-gradient-to-tr from-amber-300/35 via-orange-300/25 to-yellow-200/20 rounded-full blur-[150px] pointer-events-none z-0" />
+      <div className="absolute bottom-10 right-10 w-[600px] h-[600px] bg-gradient-to-br from-orange-300/30 via-rose-200/20 to-amber-200/20 rounded-full blur-[140px] pointer-events-none z-0" />
+      <div className="absolute top-1/3 left-10 w-[450px] h-[450px] bg-gradient-to-br from-yellow-300/20 to-orange-200/20 rounded-full blur-[120px] pointer-events-none z-0" />
+
+      {/* Subtle Grid Texture */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#00000004_1px,transparent_1px),linear-gradient(to_bottom,#00000004_1px,transparent_1px)] bg-[size:4rem_4rem] pointer-events-none z-0 mix-blend-overlay" />
 
       <div className="max-w-7xl mx-auto relative z-10">
         <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-14">
@@ -152,9 +157,9 @@ export default function EventShowcaseCarousel({ onNavigate }: EventShowcaseCarou
                   }`}
                 >
                   {/* Top Image Section (White bg, logo top center, no color overlay) */}
-                  <div className="relative h-[40%] w-full bg-white overflow-hidden border-b border-slate-100">
+                  <div className="relative h-[45%] w-full bg-white overflow-hidden border-b border-slate-100">
                     <img
-                      src={`https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&q=80&w=800&seed=${story.seed}`}
+                      src={story.imageUrl}
                       alt={story.title}
                       className="w-full h-full object-cover"
                       draggable={false}

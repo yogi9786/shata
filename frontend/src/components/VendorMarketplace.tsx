@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import { useEvents } from '../hooks/useEvents'
 import type { PageType } from '../App'
 import type { EventItem } from '../data/vendors'
@@ -11,6 +11,20 @@ export default function VendorMarketplace({ onNavigate }: VendorMarketplaceProps
   const { events: featuredEvents, loading } = useEvents()
   const [searchQuery, setSearchQuery] = useState('')
   const [activeStory, setActiveStory] = useState<EventItem | null>(null)
+  
+  const scrollContainerRef = useRef<HTMLDivElement>(null)
+
+  const scrollLeft = () => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollBy({ left: -350, behavior: 'smooth' })
+    }
+  }
+
+  const scrollRight = () => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollBy({ left: 350, behavior: 'smooth' })
+    }
+  }
 
   const filteredEvents = featuredEvents.filter((v) => {
     return v.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -19,18 +33,21 @@ export default function VendorMarketplace({ onNavigate }: VendorMarketplaceProps
   })
 
   return (
-    <section id="vendors" className="relative bg-[#FAFAFA] text-slate-900 font-geist pb-4 sm:pb-8">
+    <section id="vendors" className="relative bg-pink-50 text-slate-900 font-geist pb-4 sm:pb-8 overflow-hidden">
+      {/* ── Pink Background Glow ── */}
+      <div className="absolute top-2/3 left-1/2 -translate-x-1/2 w-[800px] h-[300px] bg-gradient-to-r from-pink-300/20 via-rose-300/20 to-orange-200/20 rounded-full blur-[120px] pointer-events-none z-0" />
       
       {/* ─── Premium Banner Section ─── */}
       <div className="relative h-[300px] sm:h-[400px] w-full overflow-hidden flex flex-col justify-center px-4 sm:px-6">
         <div className="absolute inset-0 z-0">
           <img 
-            src="/marketplace-banner.png" 
+            src="/images/indian_event_planner.png" 
             alt="Event Booking Marketplace" 
             className="w-full h-full object-cover object-center scale-105"
           />
           <div className="absolute inset-0 bg-slate-900/40 mix-blend-multiply" />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#FAFAFA] via-transparent to-slate-900/60" />
+          {/* Bottom fade pink to blend seamlessly with the stories area, acting as no divider */}
+          <div className="absolute inset-0 bg-gradient-to-t from-pink-50 via-transparent to-transparent" />
         </div>
 
         <div className="relative z-10 max-w-4xl mx-auto w-full mt-8 sm:mt-12 text-center">
@@ -66,29 +83,52 @@ export default function VendorMarketplace({ onNavigate }: VendorMarketplaceProps
             <p className="text-slate-500 font-medium tracking-wide">Curating events...</p>
           </div>
         ) : (
-          <div className="flex overflow-x-auto snap-x snap-mandatory gap-4 sm:gap-6 pb-6 px-4 sm:px-6 w-full items-start mt-6 [&::-webkit-scrollbar]:h-2 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:bg-slate-200 [&::-webkit-scrollbar-thumb]:rounded-full hover:[&::-webkit-scrollbar-thumb]:bg-slate-300 transition-colors">
-            {filteredEvents.map((event) => (
-              <div 
-                key={event.id}
-                onClick={() => setActiveStory(event)}
-                className="flex flex-col items-center gap-1.5 sm:gap-2 cursor-pointer flex-shrink-0 group snap-center w-[72px] sm:w-[84px]"
-              >
-                {/* IG Story Ring */}
-                <div className="w-[72px] h-[72px] sm:w-[84px] sm:h-[84px] rounded-full p-[2.5px] bg-gradient-to-tr from-yellow-400 via-[#FF5A00] to-pink-500 shadow-sm flex-shrink-0 transition-shadow duration-300 group-hover:shadow-md">
-                  <div className="w-full h-full rounded-full border-[2.5px] border-[#FAFAFA] overflow-hidden bg-slate-100">
-                    <img 
-                      src={event.image} 
-                      alt={event.title} 
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
-                    />
+          <div className="relative group/nav mt-6">
+            <div 
+              ref={scrollContainerRef}
+              className="flex overflow-x-auto snap-x snap-mandatory gap-4 sm:gap-6 pb-6 px-4 sm:px-6 w-full items-start [&::-webkit-scrollbar]:h-2 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:bg-slate-200 [&::-webkit-scrollbar-thumb]:rounded-full hover:[&::-webkit-scrollbar-thumb]:bg-slate-300 transition-colors lg:[&::-webkit-scrollbar]:hidden lg:scrollbar-none"
+            >
+              {filteredEvents.map((event) => (
+                <div 
+                  key={event.id}
+                  onClick={() => setActiveStory(event)}
+                  className="flex flex-col items-center gap-1.5 sm:gap-2 cursor-pointer flex-shrink-0 group snap-center w-[72px] sm:w-[84px]"
+                >
+                  {/* IG Story Ring */}
+                  <div className="w-[72px] h-[72px] sm:w-[84px] sm:h-[84px] rounded-full p-[2.5px] bg-gradient-to-tr from-yellow-400 via-[#FF5A00] to-pink-500 shadow-sm flex-shrink-0 transition-shadow duration-300 group-hover:shadow-md">
+                    <div className="w-full h-full rounded-full border-[2.5px] border-[#FAFAFA] overflow-hidden bg-slate-100">
+                      <img 
+                        src={event.image} 
+                        alt={event.title} 
+                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
+                      />
+                    </div>
                   </div>
+                  {/* Event Name */}
+                  <span className="text-[10px] sm:text-xs text-slate-700 font-medium text-center leading-tight line-clamp-2 w-full px-0.5 group-hover:text-[#FF5A00] transition-colors">
+                    {event.title}
+                  </span>
                 </div>
-                {/* Event Name */}
-                <span className="text-[10px] sm:text-xs text-slate-700 font-medium text-center leading-tight line-clamp-2 w-full px-0.5 group-hover:text-[#FF5A00] transition-colors">
-                  {event.title}
-                </span>
-              </div>
-            ))}
+              ))}
+            </div>
+            
+            {/* Navigation Arrows (Large screens only) */}
+            <button 
+              onClick={scrollLeft}
+              className="hidden lg:flex absolute left-0 top-[42px] -translate-y-1/2 -translate-x-4 w-10 h-10 bg-white/90 backdrop-blur-md rounded-full shadow-md border border-slate-200 items-center justify-center text-slate-700 hover:text-[#FF5A00] hover:scale-105 opacity-0 group-hover/nav:opacity-100 transition-all z-10 cursor-pointer"
+            >
+              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+              </svg>
+            </button>
+            <button 
+              onClick={scrollRight}
+              className="hidden lg:flex absolute right-0 top-[42px] -translate-y-1/2 translate-x-4 w-10 h-10 bg-white/90 backdrop-blur-md rounded-full shadow-md border border-slate-200 items-center justify-center text-slate-700 hover:text-[#FF5A00] hover:scale-105 opacity-0 group-hover/nav:opacity-100 transition-all z-10 cursor-pointer"
+            >
+              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
           </div>
         )}
 

@@ -164,8 +164,9 @@ export default function Header({ scrollY, currentPage, onNavigate, currentUser, 
           {/* Desktop Action Buttons */}
           <div className="hidden md:flex items-center gap-4 relative">
             <a
-              href="#vendors"
-              onClick={(e) => handleAnchorClick(e, '#vendors')}
+              href="https://play.google.com/store/apps/details?id=com.shata.partner"
+              target="_blank"
+              rel="noopener noreferrer"
               className={`text-[13px] font-medium transition-opacity tracking-tight hover:opacity-70 cursor-pointer ${
                 scrolled ? 'text-black' : 'text-white'
               }`}

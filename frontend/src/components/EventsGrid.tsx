@@ -50,9 +50,9 @@ export default function EventsGrid({ onNavigate, hideHeader }: EventsGridProps) 
             </div>
 
             <h2 className="font-geist text-3xl sm:text-4xl lg:text-5xl font-medium tracking-tight text-slate-900 leading-[1.15]">
-              Unrivaled Events &amp;{' '}
+              Book{' '}
               <span className="bg-gradient-to-r from-orange-600 via-amber-500 to-yellow-600 bg-clip-text text-transparent font-semibold">
-                Glassmorphic Grid
+                Events
               </span>
             </h2>
 
@@ -109,7 +109,7 @@ export default function EventsGrid({ onNavigate, hideHeader }: EventsGridProps) 
                   onClick={() => setSelectedCategory(cat)}
                   className={`px-3 sm:px-4 py-1.5 sm:py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition-all duration-300 cursor-pointer backdrop-blur-md ${active
                       ? 'bg-gradient-to-r from-orange-600 via-amber-500 to-yellow-500 text-white shadow-md shadow-orange-500/20 ring-2 ring-orange-400/40'
-                      : 'bg-white/70 hover:bg-white text-slate-700 hover:text-slate-900 border border-white/80 hover:border-orange-300 shadow-xs'
+                      : 'bg-orange-50/40 hover:bg-orange-100/60 text-slate-700 hover:text-orange-600 border border-orange-200/60 hover:border-orange-400/60 shadow-sm backdrop-blur-md'
                     }`}
                 >
                   {cat === 'All' ? '✨ All Events' : cat}
@@ -222,7 +222,7 @@ export default function EventsGrid({ onNavigate, hideHeader }: EventsGridProps) 
                       </button>
                       <button
                         onClick={(e) => { e.stopPropagation(); onNavigate('booking', event.title); }}
-                        className="flex-1 rounded-xl bg-gradient-to-r from-orange-600 to-amber-500 hover:from-orange-500 hover:to-amber-400 text-white font-semibold text-xs shadow-sm transition-all cursor-pointer"
+                        className="flex-1 rounded-xl border border-orange-200 bg-gradient-to-r from-orange-50/80 to-amber-50/80 backdrop-blur-md hover:from-orange-100 hover:to-amber-100 text-orange-700 hover:text-orange-800 font-semibold text-xs transition-all shadow-sm cursor-pointer"
                       >
                         Book
                       </button>
