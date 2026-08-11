@@ -23,7 +23,7 @@ export default function LogoLoader({ className = '', size = 'md', text = 'Loadin
     <div className={`flex flex-col items-center justify-center py-16 text-center select-none ${className}`}>
       <div className={`relative flex items-center justify-center ${sizeClasses[size]}`}>
         {/* Outer light track ring */}
-        <div className="absolute inset-0 rounded-full border-2 border-slate-100" />
+        <div className="absolute inset-0 rounded-full border-2 border-black/10" />
         
         {/* Outer spinning premium gradient arc */}
         <div className="absolute inset-0 rounded-full border-2 border-transparent border-t-orange-500 border-r-amber-500 animate-spin" />
@@ -43,10 +43,11 @@ export default function LogoLoader({ className = '', size = 'md', text = 'Loadin
         />
       </div>
       {text && (
-        <p className="mt-5 text-[10px] sm:text-xs font-bold text-slate-400 uppercase tracking-widest animate-pulse" style={{ animationDuration: '2.5s' }}>
+        <p className="mt-5 text-[10px] sm:text-xs font-bold text-black/50 uppercase tracking-widest animate-pulse" style={{ animationDuration: '2.5s' }}>
           {text}
         </p>
       )}
     </div>
   )
 }
+

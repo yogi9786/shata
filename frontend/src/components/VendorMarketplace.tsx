@@ -34,40 +34,43 @@ export default function VendorMarketplace({ onNavigate }: VendorMarketplaceProps
   })
 
   return (
-    <section id="vendors" className="relative bg-pink-50 text-slate-900 font-geist pb-4 sm:pb-8 overflow-hidden">
-      {/* ── Pink Background Glow ── */}
-      <div className="absolute top-2/3 left-1/2 -translate-x-1/2 w-[800px] h-[300px] bg-gradient-to-r from-pink-300/20 via-rose-300/20 to-orange-200/20 rounded-full blur-[120px] pointer-events-none z-0" />
+    <section id="vendors" className="relative bg-transparent text-black font-geist pb-8 sm:pb-14 overflow-hidden">
+      {/* Warm ambient glow */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[300px] bg-gradient-to-r from-[#F3E5AB]/40 via-slate-100/30 to-transparent rounded-full blur-[120px] pointer-events-none z-0" />
       
       {/* ─── Premium Banner Section ─── */}
-      <div className="relative h-[300px] sm:h-[400px] w-full overflow-hidden flex flex-col justify-center px-4 sm:px-6">
+      <div className="relative h-[300px] sm:h-[420px] w-full overflow-hidden flex flex-col justify-center px-4 sm:px-6">
         <div className="absolute inset-0 z-0">
           <img 
             src="/images/indian_event_planner.png" 
             alt="Event Booking Marketplace" 
             className="w-full h-full object-cover object-center scale-105"
           />
-          <div className="absolute inset-0 bg-slate-900/40 mix-blend-multiply" />
-          {/* Bottom fade pink to blend seamlessly with the stories area, acting as no divider */}
-          <div className="absolute inset-0 bg-gradient-to-t from-pink-50 via-transparent to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-br from-black/60 via-slate-800/40 to-slate-900/50" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#FFFDF9] via-transparent to-transparent" />
         </div>
 
         <div className="relative z-10 max-w-4xl mx-auto w-full mt-8 sm:mt-12 text-center">
-          <span className="inline-block px-4 py-1.5 rounded-full bg-white/20 backdrop-blur-md text-white text-xs sm:text-sm font-bold uppercase tracking-[0.2em] mb-4 shadow-sm border border-white/30">
+          <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#FF7518]/20 backdrop-blur-md border border-[#FF7518]/30 text-white text-xs sm:text-sm font-bold uppercase tracking-[0.2em] mb-5">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#FF7518] animate-pulse" />
             Event Booking Simplified
           </span>
-          <h2 className="font-geist text-3xl sm:text-5xl font-medium text-white tracking-tight leading-[1.1] mb-6 drop-shadow-md">
-            Connecting You with Top Event Organizers
+          <h2 className="font-geist text-3xl sm:text-5xl md:text-6xl font-extrabold text-white tracking-tight leading-[1.1] mb-6">
+            Connecting You with Top{' '}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF7518] to-orange-400 drop-shadow-sm">
+              Event Organizers
+            </span>
           </h2>
           
-          <div className="relative max-w-xl mx-auto group">
+          <div className="relative max-w-xl mx-auto">
             <input
               type="text"
               placeholder="Search vendors & locations..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-12 pr-6 py-3.5 sm:py-4 bg-white/95 backdrop-blur-md border border-white/40 rounded-full text-sm sm:text-base text-slate-900 placeholder-slate-500 focus:outline-none focus:ring-4 focus:ring-[#FF5A00]/30 shadow-xl transition-all"
+              className="w-full pl-12 pr-6 py-3.5 sm:py-4 bg-white/95 backdrop-blur-md border border-white/60 rounded-2xl text-sm text-black placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#D4AF37]/40 shadow-lg transition-all"
             />
-            <svg className="w-5 h-5 sm:w-6 sm:h-6 text-slate-400 absolute left-4 top-1/2 -translate-y-1/2 group-focus-within:text-[#FF5A00] transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+            <svg className="w-5 h-5 text-black/50 absolute left-4 top-1/2 -translate-y-1/2" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
             </svg>
           </div>
@@ -75,7 +78,7 @@ export default function VendorMarketplace({ onNavigate }: VendorMarketplaceProps
       </div>
 
       {/* ─── Stories Area ─── */}
-      <div className="max-w-7xl mx-auto relative z-10 -mt-2 sm:-mt-6">
+      <div className="max-w-7xl mx-auto relative z-10 -mt-4 sm:-mt-8">
         
         {/* Stories Horizontal Scroll */}
         {loading ? (
@@ -84,17 +87,16 @@ export default function VendorMarketplace({ onNavigate }: VendorMarketplaceProps
           <div className="relative group/nav mt-6">
             <div 
               ref={scrollContainerRef}
-              className="flex overflow-x-auto snap-x snap-mandatory gap-4 sm:gap-6 pb-6 px-4 sm:px-6 w-full items-start [&::-webkit-scrollbar]:h-2 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:bg-slate-200 [&::-webkit-scrollbar-thumb]:rounded-full hover:[&::-webkit-scrollbar-thumb]:bg-slate-300 transition-colors lg:[&::-webkit-scrollbar]:hidden lg:scrollbar-none"
+              className="flex overflow-x-auto snap-x snap-mandatory gap-4 sm:gap-5 pb-4 px-4 sm:px-6 w-full items-start [&::-webkit-scrollbar]:hidden scrollbar-none"
             >
               {filteredEvents.map((event) => (
-                <div 
+                <div
                   key={event.id}
                   onClick={() => setActiveStory(event)}
-                  className="flex flex-col items-center gap-1.5 sm:gap-2 cursor-pointer flex-shrink-0 group snap-center w-[72px] sm:w-[84px]"
-                >
-                  {/* IG Story Ring */}
-                  <div className="w-[72px] h-[72px] sm:w-[84px] sm:h-[84px] rounded-full p-[2.5px] bg-gradient-to-tr from-yellow-400 via-[#FF5A00] to-pink-500 shadow-sm flex-shrink-0 transition-shadow duration-300 group-hover:shadow-md">
-                    <div className="w-full h-full rounded-full border-[2.5px] border-[#FAFAFA] overflow-hidden bg-slate-100">
+                  className="flex flex-col items-center gap-1.5 sm:gap-2 cursor-pointer flex-shrink-0 group snap-center w-[72px] sm:w-[84px]">
+                  {/* Story Ring */}
+                  <div className="w-[72px] h-[72px] sm:w-[84px] sm:h-[84px] rounded-full p-[2.5px] bg-gradient-to-tr from-[#D4AF37] via-[#B8860B] to-[#F3E5AB] shadow-md flex-shrink-0 transition-all duration-300 group-hover:shadow-lg group-hover:shadow-[#B8860B]/40">
+                    <div className="w-full h-full rounded-full border-[2.5px] border-[#FFFDF9] overflow-hidden bg-white">
                       <img 
                         src={event.image} 
                         alt={event.title} 
@@ -103,17 +105,17 @@ export default function VendorMarketplace({ onNavigate }: VendorMarketplaceProps
                     </div>
                   </div>
                   {/* Event Name */}
-                  <span className="text-[10px] sm:text-xs text-slate-700 font-medium text-center leading-tight line-clamp-2 w-full px-0.5 group-hover:text-[#FF5A00] transition-colors">
+                  <span className="text-[10px] sm:text-xs text-black/70 font-medium text-center leading-tight line-clamp-2 w-full px-0.5 group-hover:text-[#D4AF37] transition-colors">
                     {event.title}
                   </span>
                 </div>
               ))}
             </div>
             
-            {/* Navigation Arrows (Large screens only) */}
+            {/* Navigation Arrows */}
             <button 
               onClick={scrollLeft}
-              className="hidden lg:flex absolute left-0 top-[42px] -translate-y-1/2 -translate-x-4 w-10 h-10 bg-white/90 backdrop-blur-md rounded-full shadow-md border border-slate-200 items-center justify-center text-slate-700 hover:text-[#FF5A00] hover:scale-105 opacity-0 group-hover/nav:opacity-100 transition-all z-10 cursor-pointer"
+              className="hidden lg:flex absolute left-0 top-[42px] -translate-y-1/2 -translate-x-4 w-10 h-10 bg-white/95 backdrop-blur-md rounded-full shadow-md border border-black/20 items-center justify-center text-black/80 hover:text-[#D4AF37] hover:border-[#D4AF37]/50 hover:scale-105 opacity-0 group-hover/nav:opacity-100 transition-all z-10 cursor-pointer"
             >
               <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
@@ -121,7 +123,7 @@ export default function VendorMarketplace({ onNavigate }: VendorMarketplaceProps
             </button>
             <button 
               onClick={scrollRight}
-              className="hidden lg:flex absolute right-0 top-[42px] -translate-y-1/2 translate-x-4 w-10 h-10 bg-white/90 backdrop-blur-md rounded-full shadow-md border border-slate-200 items-center justify-center text-slate-700 hover:text-[#FF5A00] hover:scale-105 opacity-0 group-hover/nav:opacity-100 transition-all z-10 cursor-pointer"
+              className="hidden lg:flex absolute right-0 top-[42px] -translate-y-1/2 translate-x-4 w-10 h-10 bg-white/95 backdrop-blur-md rounded-full shadow-md border border-black/20 items-center justify-center text-black/80 hover:text-[#D4AF37] hover:border-[#D4AF37]/50 hover:scale-105 opacity-0 group-hover/nav:opacity-100 transition-all z-10 cursor-pointer"
             >
               <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
@@ -132,17 +134,17 @@ export default function VendorMarketplace({ onNavigate }: VendorMarketplaceProps
 
         {/* Empty State */}
         {!loading && filteredEvents.length === 0 && (
-          <div className="text-center py-24 mx-4 sm:mx-0 bg-white border border-slate-200/80 rounded-[32px] shadow-sm mt-4">
-            <div className="w-16 h-16 bg-slate-50 rounded-full flex items-center justify-center mx-auto mb-4 border border-slate-100">
-              <svg className="w-8 h-8 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+          <div className="text-center py-24 mx-4 sm:mx-0 glass-panel-light rounded-[2rem] mt-4">
+            <div className="w-16 h-16 bg-[#FDFBF4] rounded-full flex items-center justify-center mx-auto mb-4 border border-[#D4AF37]/30">
+              <svg className="w-8 h-8 text-[#D4AF37]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
               </svg>
             </div>
-            <h4 className="font-geist text-lg font-semibold text-slate-900 mb-2">No Stories Found</h4>
-            <p className="text-slate-500 text-sm max-w-xs mx-auto">Try exploring different search terms.</p>
+            <h4 className="font-geist text-lg font-semibold text-black mb-2">No Stories Found</h4>
+            <p className="text-black/50 text-sm max-w-xs mx-auto">Try exploring different search terms.</p>
             <button 
               onClick={() => { setSearchQuery(''); }}
-              className="mt-6 px-6 py-2.5 bg-slate-900 text-white rounded-full text-sm font-medium hover:bg-slate-800 transition-colors cursor-pointer"
+              className="btn-premium-black mt-6 px-6 py-2.5 rounded-full text-sm font-bold cursor-pointer"
             >
               Clear Search
             </button>
@@ -168,14 +170,14 @@ export default function VendorMarketplace({ onNavigate }: VendorMarketplaceProps
           </button>
           
           {/* Story Card */}
-          <div className="relative w-full h-full sm:max-w-md sm:h-[85vh] sm:rounded-[2rem] overflow-hidden shadow-2xl flex flex-col z-10 bg-slate-900 animate-in slide-in-from-bottom-8 sm:slide-in-from-bottom-0 sm:zoom-in-95 duration-300">
+          <div className="relative w-full h-full sm:max-w-md sm:h-[85vh] sm:rounded-[2rem] overflow-hidden shadow-2xl flex flex-col z-10 bg-black animate-in slide-in-from-bottom-8 sm:slide-in-from-bottom-0 sm:zoom-in-95 duration-300">
             
             <img 
               src={activeStory.image} 
               alt={activeStory.title} 
               className="absolute inset-0 w-full h-full object-cover opacity-80" 
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-900/50 to-slate-900/20" />
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-black/50 to-slate-900/20" />
 
             {/* Simulated Story Progress Bar */}
             <div className="absolute top-4 inset-x-4 flex gap-1 z-10">
@@ -186,7 +188,7 @@ export default function VendorMarketplace({ onNavigate }: VendorMarketplaceProps
             
             {/* Header info (Provider/Category) */}
             <div className="absolute top-8 left-4 flex items-center gap-2 z-10">
-               <div className="w-8 h-8 rounded-full border border-white/50 overflow-hidden bg-slate-800 flex-shrink-0">
+               <div className="w-8 h-8 rounded-full border border-white/50 overflow-hidden bg-black/90 flex-shrink-0">
                   <img src={activeStory.image} className="w-full h-full object-cover" alt="" />
                </div>
                <span className="text-white text-sm font-semibold shadow-sm">{activeStory.category}</span>
@@ -212,7 +214,7 @@ export default function VendorMarketplace({ onNavigate }: VendorMarketplaceProps
                 </svg>
                 <span>{activeStory.location}</span>
                 <span className="mx-2 text-white/40">•</span>
-                <span className="text-[#FF5A00] font-bold">★ {activeStory.rating.toFixed(1)}</span>
+                <span className="text-[#D4AF37] font-bold">★ {activeStory.rating.toFixed(1)}</span>
               </div>
               
               <p className="text-white/80 text-sm line-clamp-3 mb-8">
@@ -234,7 +236,7 @@ export default function VendorMarketplace({ onNavigate }: VendorMarketplaceProps
                     setActiveStory(null);
                     onNavigate('booking', activeStory.title);
                   }} 
-                  className="flex-1 py-3.5 bg-[#FF5A00] hover:bg-[#E04F00] text-white rounded-full font-bold shadow-[0_0_20px_rgba(255,90,0,0.3)] transition-all cursor-pointer"
+                  className="btn-premium-gold flex-1 py-3.5 rounded-full font-bold transition-all cursor-pointer"
                 >
                   Book Now
                 </button>
@@ -246,3 +248,4 @@ export default function VendorMarketplace({ onNavigate }: VendorMarketplaceProps
     </section>
   )
 }
+

@@ -2,23 +2,32 @@ const benefits = [
   {
     number: '01',
     title: 'Curated Excellence',
-    description:
-      'Access an exclusive network of elite vendors, meticulously vetted for quality, reliability, and sheer brilliance in execution.',
-    gradient: 'from-orange-500 to-rose-500',
+    description: 'Access an exclusive network of elite vendors, meticulously vetted for quality, reliability, and sheer brilliance.',
+    icon: '✦',
+    iconBg: 'bg-[#FDFBF4] border-[#D4AF37]/30',
+    iconColor: 'text-[#D4AF37]',
+    accentBar: 'from-[#D4AF37] to-[#B8860B]',
+    hoverBorder: 'hover:border-[#D4AF37]/50',
   },
   {
     number: '02',
     title: 'Bespoke Curation',
-    description:
-      'Every event is a unique masterpiece. We don\'t just book; we design, coordinate, and perfect every detail to your vision.',
-    gradient: 'from-amber-400 to-orange-500',
+    description: "Every event is a unique masterpiece. We design, coordinate, and perfect every detail to your vision — not anyone else's.",
+    icon: '◈',
+    iconBg: 'bg-[#FDFBF4] border-[#D4AF37]/30',
+    iconColor: 'text-[#D4AF37]',
+    accentBar: 'from-[#D4AF37] to-[#B8860B]',
+    hoverBorder: 'hover:border-[#D4AF37]/50',
   },
   {
     number: '03',
-    title: 'Absolute Transparency',
-    description:
-      'No hidden fees, no unexpected surprises. Experience direct vendor pricing with comprehensive event insurance and zero-stress protection.',
-    gradient: 'from-yellow-400 to-amber-500',
+    title: 'Zero Hidden Fees',
+    description: 'No surprises. Experience direct vendor pricing with comprehensive event insurance and full budget transparency.',
+    icon: '◎',
+    iconBg: 'bg-[#FDFBF4] border-[#D4AF37]/30',
+    iconColor: 'text-[#D4AF37]',
+    accentBar: 'from-[#D4AF37] to-[#B8860B]',
+    hoverBorder: 'hover:border-[#D4AF37]/50',
   },
 ]
 
@@ -28,59 +37,70 @@ interface BookingBenefitsProps {
 
 export default function BookingBenefits({ hideHeader }: BookingBenefitsProps = {}) {
   return (
-    <section id="benefits" className="px-4 sm:px-6 py-10 sm:py-16 font-geist relative">
-      {/* Abstract Background Elements (Light) */}
-      <div className="absolute top-0 right-0 w-full h-full pointer-events-none z-0 opacity-40">
-        <div className="absolute top-[-20%] right-[-10%] w-[300px] h-[300px] rounded-full bg-gradient-to-bl from-orange-300/30 to-amber-200/20 blur-[100px]" />
-        <div className="absolute bottom-[-20%] left-[-10%] w-[400px] h-[400px] rounded-full bg-gradient-to-tr from-rose-300/20 to-orange-300/20 blur-[120px]" />
-      </div>
+    <section id="benefits" className="px-4 sm:px-6 py-16 sm:py-24 font-geist relative overflow-hidden bg-transparent">
+      {/* Warm radial blobs */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[300px] rounded-full bg-gradient-to-b from-white/40 to-transparent blur-[100px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto relative z-10">
-        {/* header */}
+        {/* Header */}
         {!hideHeader && (
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
-            <div className="max-w-2xl">
-              <span className="text-xs font-semibold uppercase tracking-[0.25em] text-orange-600 block mb-2.5">
-                The Shata Advantage
-              </span>
-              <h2 className="font-geist text-3xl sm:text-4xl font-semibold text-slate-900 tracking-tight leading-[1.1]">
-                Elevate Your <br className="hidden sm:block" />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-600 to-amber-500">Experience.</span>
+          <div className="mb-12 sm:mb-16">
+            <div className="pill-gold mb-4">The Shata Advantage</div>
+            <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+              <h2 className="font-geist text-3xl sm:text-4xl lg:text-5xl font-semibold text-black tracking-tight leading-[1.1] max-w-lg">
+                How We Keep You{' '}
+                <span className="text-gradient-gold">Ahead</span>
               </h2>
+              <p className="text-black/60 text-sm leading-relaxed max-w-xs sm:text-right">
+                Why visionary clients trust us to orchestrate their most important moments.
+              </p>
             </div>
-            <p className="text-slate-500 text-sm max-w-sm md:text-right font-medium leading-relaxed">
-              Why visionary clients trust us to orchestrate their most important, unforgettable moments.
-            </p>
           </div>
         )}
 
-        {/* Dynamic Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
+        {/* Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-5">
           {benefits.map((b, i) => (
-            <div 
-              key={i} 
-              className="group relative p-5 sm:p-6 rounded-3xl bg-white/40 border border-white/60 hover:border-orange-400/60 shadow-lg shadow-slate-200/40 backdrop-blur-2xl transition-all duration-500 overflow-hidden flex flex-col justify-end glass-shine-light"
+            <div
+              key={i}
+              className={`group relative glass-panel-light rounded-2xl sm:rounded-3xl p-6 sm:p-8 flex flex-col gap-5 shadow-sm hover:shadow-xl hover:shadow-[#B8860B]/10 hover:-translate-y-1.5 transition-all duration-400 overflow-hidden ${b.hoverBorder}`}
             >
-              {/* Giant Background Number */}
-              <div className="absolute top-2 right-4 text-[80px] font-bold leading-none text-slate-900/5 group-hover:text-slate-900/10 transition-colors duration-500 pointer-events-none font-geist tracking-tighter">
-                {b.number}
+              {/* Accent bar at top */}
+              <div className={`absolute top-0 left-6 right-6 h-0.5 rounded-full bg-gradient-to-r ${b.accentBar} opacity-0 group-hover:opacity-100 transition-opacity duration-400`} />
+
+              {/* Icon in colored box */}
+              <div className={`w-12 h-12 rounded-2xl ${b.iconBg} border flex items-center justify-center flex-shrink-0`}>
+                <span className={`text-xl font-bold ${b.iconColor}`}>{b.icon}</span>
               </div>
 
-              {/* Glowing Accent */}
-              <div className={`absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r ${b.gradient} transform scale-x-0 group-hover:scale-x-100 transition-transform duration-700 origin-left`} />
-
-              <div className="relative z-10">
-                <div className={`w-10 h-10 mb-4 rounded-xl bg-gradient-to-br ${b.gradient} flex items-center justify-center shadow-md`}>
-                  <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                  </svg>
-                </div>
-                
-                <h4 className="font-geist text-lg font-bold text-slate-900 mb-2 tracking-tight">{b.title}</h4>
-                <p className="text-slate-600 text-xs sm:text-sm leading-relaxed font-normal group-hover:text-slate-800 transition-colors duration-300">
+              {/* Content */}
+              <div className="flex flex-col gap-3 flex-1">
+                <h4 className="font-geist text-xl sm:text-2xl font-semibold text-black leading-snug group-hover:text-[#D4AF37] transition-colors">
+                  {b.title}
+                </h4>
+                <p className="text-black/60 text-sm leading-relaxed">
                   {b.description}
                 </p>
               </div>
+
+              {/* Large bg number */}
+              <div className="absolute bottom-3 right-5 text-[68px] font-bold leading-none text-slate-50 group-hover:text-white transition-colors pointer-events-none font-geist tracking-tighter">
+                {b.number}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Trust bar */}
+        <div className="flex flex-wrap items-center justify-center gap-6 sm:gap-10 mt-12 pt-8 border-t border-black/10">
+          {[
+            { icon: '✦', text: 'Always Current' },
+            { icon: '◎', text: 'Focused for You' },
+            { icon: '+', text: 'Actionable Steps' },
+          ].map((item) => (
+            <div key={item.text} className="flex items-center gap-2 text-black/50 text-xs font-semibold">
+              <span className="text-[#D4AF37]">{item.icon}</span>
+              {item.text}
             </div>
           ))}
         </div>
@@ -88,3 +108,4 @@ export default function BookingBenefits({ hideHeader }: BookingBenefitsProps = {
     </section>
   )
 }
+

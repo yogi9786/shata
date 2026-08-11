@@ -147,12 +147,18 @@ function App() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-900 antialiased overflow-x-hidden relative selection:bg-orange-500 selection:text-white">
-      {/* Global Glassmorphism Ambient Background */}
+    <div className="min-h-screen bg-[#FAFAF8] text-slate-900 antialiased overflow-x-hidden relative font-geist">
+      {/* Global Premium Glassmorphism Background */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
-        <div className="absolute -top-[20%] -left-[10%] w-[50vw] h-[50vw] rounded-full bg-gradient-to-br from-orange-400/20 via-amber-200/20 to-rose-300/10 blur-[120px] mix-blend-multiply animate-float opacity-80" />
-        <div className="absolute top-[20%] -right-[10%] w-[45vw] h-[45vw] rounded-full bg-gradient-to-tl from-yellow-300/20 via-orange-300/10 to-amber-200/20 blur-[100px] mix-blend-multiply animate-float opacity-70" style={{ animationDelay: '2s' }} />
-        <div className="absolute -bottom-[20%] left-[20%] w-[60vw] h-[60vw] rounded-full bg-gradient-to-tr from-rose-200/20 via-orange-200/15 to-yellow-100/10 blur-[140px] mix-blend-multiply animate-float opacity-70" style={{ animationDelay: '4s' }} />
+        <div className="absolute inset-0 bg-[#FAFAF8] opacity-90 mix-blend-overlay" />
+        
+        {/* Dynamic mesh gradients - Champagne/Silver/Gold */}
+        <div className="absolute -top-[10%] -left-[10%] w-[60vw] h-[60vw] rounded-full bg-gradient-to-br from-[#D4AF37]/15 via-slate-200/40 to-transparent blur-[120px] animate-pulse" style={{ animationDuration: '8s' }} />
+        <div className="absolute top-[20%] -right-[15%] w-[50vw] h-[50vw] rounded-full bg-gradient-to-tl from-[#F3E5AB]/30 via-slate-100/20 to-transparent blur-[140px] animate-pulse" style={{ animationDuration: '10s', animationDelay: '2s' }} />
+        <div className="absolute -bottom-[20%] left-[20%] w-[70vw] h-[70vw] rounded-full bg-gradient-to-tr from-slate-200/30 via-[#D4AF37]/10 to-transparent blur-[160px] animate-pulse" style={{ animationDuration: '12s', animationDelay: '4s' }} />
+        
+        {/* Subtle noise/grid texture */}
+        <div className="absolute inset-0 grid-texture-light opacity-60" />
       </div>
 
       <div className="relative z-10 flex flex-col min-h-screen justify-between">

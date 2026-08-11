@@ -77,32 +77,26 @@ export default function EventShowcaseCarousel({ onNavigate }: EventShowcaseCarou
 
 
   return (
-    <section id="showcase-carousel" className="relative px-3 sm:px-6 lg:px-8 py-10 sm:py-16 overflow-hidden font-geist">
-      {/* ── Professional Section Glass Blur Background Layers ── */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[750px] h-[750px] bg-gradient-to-tr from-amber-300/35 via-orange-300/25 to-yellow-200/20 rounded-full blur-[150px] pointer-events-none z-0" />
-      <div className="absolute bottom-10 right-10 w-[600px] h-[600px] bg-gradient-to-br from-orange-300/30 via-rose-200/20 to-amber-200/20 rounded-full blur-[140px] pointer-events-none z-0" />
-      <div className="absolute top-1/3 left-10 w-[450px] h-[450px] bg-gradient-to-br from-yellow-300/20 to-orange-200/20 rounded-full blur-[120px] pointer-events-none z-0" />
-
-      {/* Subtle Grid Texture */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#00000004_1px,transparent_1px),linear-gradient(to_bottom,#00000004_1px,transparent_1px)] bg-[size:4rem_4rem] pointer-events-none z-0 mix-blend-overlay" />
+    <section id="showcase-carousel" className="relative px-3 sm:px-6 lg:px-8 py-14 sm:py-20 overflow-hidden font-geist bg-transparent">
+      {/* Background ambient removed so the global mesh comes through */}
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[400px] bg-gradient-to-tr from-white/40 to-transparent rounded-full blur-[130px] pointer-events-none z-0" />
+      <div className="absolute bottom-0 right-0 w-[500px] h-[400px] bg-gradient-to-bl from-[#F3E5AB]/40 to-transparent rounded-full blur-[120px] pointer-events-none z-0" />
 
       <div className="max-w-7xl mx-auto relative z-10">
         <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-14">
-          <span className="inline-block font-medium tracking-[0.2em] uppercase text-orange-600 mb-3 text-[11px] sm:text-xs">
-            Client Success Stories
-          </span>
-          <h2 className="font-geist text-3xl sm:text-4xl font-medium tracking-tight text-slate-900 leading-[1.15] mb-3">
+          <div className="pill-gold mx-auto mb-4" style={{ width: 'fit-content' }}>Client Success Stories</div>
+          <h2 className="font-geist text-3xl sm:text-4xl font-semibold tracking-tight text-black leading-[1.15] mb-3">
             Don't Just Take Our{" "}
-            <span className="bg-gradient-to-r from-orange-600 via-amber-500 to-yellow-600 bg-clip-text text-transparent">
+            <span className="text-gradient-gold">
               Word For It
             </span>
           </h2>
-          <p className="text-slate-600 text-sm sm:text-base leading-relaxed max-w-xl mx-auto mb-6">
-            Hear directly from the clients who turned their event visions into high-quality reality with Shata.
+          <p className="text-black/60 text-sm sm:text-base leading-relaxed max-w-xl mx-auto mb-6">
+            Hear directly from the clients who turned their event visions into reality with Shata.
           </p>
           <button
             onClick={() => onNavigate("home")}
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-slate-900 text-white font-medium text-xs sm:text-sm hover:bg-orange-600 transition-all shadow-md hover:shadow-orange-500/30 group cursor-pointer"
+            className="btn-premium-black inline-flex items-center gap-2 px-5 py-2.5 rounded-full font-bold text-xs sm:text-sm group cursor-pointer"
           >
             <span>Start Your Journey</span>
             <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -151,13 +145,15 @@ export default function EventShowcaseCarousel({ onNavigate }: EventShowcaseCarou
                 }}
                 onClick={() => !isActive && goTo(i)}
               >
-                <div
-                  className={`group relative w-full h-full rounded-2xl sm:rounded-3xl bg-white border overflow-hidden shadow-xl shadow-slate-200/50 transition-all duration-500 flex flex-col ${
-                    isActive ? "border-orange-500 ring-1 ring-orange-200/70 shadow-2xl shadow-orange-300/40" : "border-slate-200"
-                  }`}
-                >
-                  {/* Top Image Section (White bg, logo top center, no color overlay) */}
-                  <div className="relative h-[45%] w-full bg-white overflow-hidden border-b border-slate-100">
+              <div
+                className={`group relative w-full h-full rounded-2xl sm:rounded-3xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-500 flex flex-col glass-panel-light ${
+                  isActive
+                    ? 'border-[#D4AF37]/50 shadow-[#B8860B]/20'
+                    : ''
+                }`}
+              >
+                  {/* Top Image Section */}
+                  <div className="relative h-[45%] w-full overflow-hidden border-b border-black/10">
                     <img
                       src={story.imageUrl}
                       alt={story.title}
@@ -167,45 +163,45 @@ export default function EventShowcaseCarousel({ onNavigate }: EventShowcaseCarou
                     />
                     
                     {/* Top Center Logo */}
-                    <div className="absolute top-3.5 left-1/2 -translate-x-1/2 z-10 bg-white/95 px-3 py-1 rounded-full shadow-md border border-slate-100/90 flex items-center justify-center">
+                    <div className="absolute top-3.5 left-1/2 -translate-x-1/2 z-10 bg-white/95 backdrop-blur-md px-3 py-1 rounded-full shadow-md border border-black/10 flex items-center justify-center">
                       <img src={logoSvg} alt="Shata Logo" className="h-3.5 w-auto object-contain" />
                     </div>
 
                     <div className="absolute bottom-2.5 left-3 z-10">
-                      <span className="px-2.5 py-0.5 rounded-full text-[9px] font-bold uppercase tracking-wider bg-black/75 text-white">
+                      <span className="px-2.5 py-0.5 rounded-full text-[9px] font-bold uppercase tracking-wider bg-black/70 text-white">
                         {story.category}
                       </span>
                     </div>
 
                     <div className="absolute bottom-2.5 right-3 z-10">
-                      <span className="px-2 py-0.5 rounded-full text-[9px] font-extrabold text-amber-400 bg-black/75">
+                      <span className="px-2 py-0.5 rounded-full text-[9px] font-extrabold text-[#D4AF37] bg-black/70">
                         ★ {story.rating.toFixed(1)}
                       </span>
                     </div>
                   </div>
 
-                  {/* Bottom Text Section (White bg, dark text) */}
-                  <div className="flex-1 p-5 sm:p-6 bg-white flex flex-col justify-between text-slate-800 text-left">
+                  {/* Bottom Review Section */}
+                  <div className="flex-1 p-4 sm:p-5 bg-white/40 flex flex-col justify-between text-left">
                     <div>
-                      <svg className="w-6 h-6 sm:w-7 sm:h-7 text-orange-500/20 mb-2" fill="currentColor" viewBox="0 0 24 24">
+                      <svg className="w-6 h-6 text-[#D4AF37]/50 mb-2" fill="currentColor" viewBox="0 0 24 24">
                         <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 5.849h3.983v10h-9.983z" />
                       </svg>
-                      <p className="text-xs sm:text-sm italic leading-relaxed text-slate-600 line-clamp-3 mb-4">
+                      <p className="text-xs sm:text-sm italic leading-relaxed text-black/70 line-clamp-3 mb-4">
                         "{story.reviewText}"
                       </p>
                     </div>
 
-                    <div className="flex items-center gap-3 pt-3.5 border-t border-slate-100 mt-auto">
+                    <div className="flex items-center gap-3 pt-3 border-t border-black/10 mt-auto">
                       <img 
                         src={story.avatarUrl} 
                         alt={story.reviewerName} 
-                        className="w-8.5 h-8.5 rounded-full border border-orange-400/50 object-cover"
+                        className="w-8 h-8 rounded-full border border-[#D4AF37]/40 object-cover"
                       />
                       <div className="min-w-0">
-                        <h4 className="text-xs font-bold text-slate-900 leading-tight truncate">
+                        <h4 className="text-xs font-bold text-black leading-tight truncate">
                           {story.reviewerName}
                         </h4>
-                        <p className="text-[9px] text-orange-600 mt-0.5 truncate">
+                        <p className="text-[9px] text-[#D4AF37] mt-0.5 truncate">
                           {story.title} • {story.location}
                         </p>
                       </div>
@@ -219,7 +215,7 @@ export default function EventShowcaseCarousel({ onNavigate }: EventShowcaseCarou
           <button
             aria-label="Previous"
             onClick={() => { setAutoplay(false); go(-1); }}
-            className="absolute left-1 sm:left-4 top-1/2 -translate-y-1/2 z-50 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-white/60 backdrop-blur-md border border-white/80 shadow-md flex items-center justify-center text-slate-900 hover:bg-white/90 hover:scale-105 transition-all cursor-pointer"
+            className="absolute left-1 sm:left-4 top-1/2 -translate-y-1/2 z-50 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-white border border-black/20 shadow-md flex items-center justify-center text-black/80 hover:text-[#D4AF37] hover:border-[#D4AF37]/50 hover:scale-105 transition-all cursor-pointer"
           >
             <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.2}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
@@ -228,7 +224,7 @@ export default function EventShowcaseCarousel({ onNavigate }: EventShowcaseCarou
           <button
             aria-label="Next"
             onClick={() => { setAutoplay(false); go(1); }}
-            className="absolute right-1 sm:right-4 top-1/2 -translate-y-1/2 z-50 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-white/60 backdrop-blur-md border border-white/80 shadow-md flex items-center justify-center text-slate-900 hover:bg-white/90 hover:scale-105 transition-all cursor-pointer"
+            className="absolute right-1 sm:right-4 top-1/2 -translate-y-1/2 z-50 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-white border border-black/20 shadow-md flex items-center justify-center text-black/80 hover:text-[#D4AF37] hover:border-[#D4AF37]/50 hover:scale-105 transition-all cursor-pointer"
           >
             <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.2}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
@@ -245,8 +241,8 @@ export default function EventShowcaseCarousel({ onNavigate }: EventShowcaseCarou
           >
             <div
               className={`h-1.5 rounded-full transition-all duration-500 ease-out ${idx === active
-                ? 'w-8 sm:w-12 bg-orange-500 shadow-[0_0_10px_rgba(249,115,22,0.6)]'
-                : 'w-2 sm:w-2.5 bg-slate-300 hover:bg-slate-400 group-hover:w-4'
+                ? 'w-8 sm:w-12 bg-[#D4AF37] shadow-[0_0_8px_rgba(212,175,55,0.4)]'
+                : 'w-2 sm:w-2.5 bg-black/20 hover:bg-slate-300 group-hover:w-4'
                 }`}
             />
           </button>
@@ -256,3 +252,4 @@ export default function EventShowcaseCarousel({ onNavigate }: EventShowcaseCarou
     </section>
   );
 }
+
