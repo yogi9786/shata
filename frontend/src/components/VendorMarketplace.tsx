@@ -51,13 +51,13 @@ export default function VendorMarketplace({ onNavigate }: VendorMarketplaceProps
         </div>
 
         <div className="relative z-10 max-w-4xl mx-auto w-full mt-8 sm:mt-12 text-center">
-          <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#FF7518]/20 backdrop-blur-md border border-[#FF7518]/30 text-white text-xs sm:text-sm font-bold uppercase tracking-[0.2em] mb-5">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#FF7518] animate-pulse" />
+          <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#D8B4FE]/20 backdrop-blur-md border border-[#D8B4FE]/30 text-white text-xs sm:text-sm font-bold uppercase tracking-[0.2em] mb-5">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#D8B4FE] animate-pulse" />
             Event Booking Simplified
           </span>
           <h2 className="font-geist text-3xl sm:text-5xl md:text-6xl font-extrabold text-white tracking-tight leading-[1.1] mb-6">
             Connecting You with Top{' '}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF7518] to-orange-400 drop-shadow-sm">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#D8B4FE] to-orange-400 drop-shadow-sm">
               Event Organizers
             </span>
           </h2>

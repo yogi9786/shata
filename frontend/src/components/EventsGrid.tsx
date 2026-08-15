@@ -5,7 +5,7 @@ import LogoLoader from './LogoLoader'
 
 // Import the specific local images for mapping
 import weddingImg from '../assets/wedding.png'
-import concertImg from '../assets/concert.png'
+import concertImg from '../assets/ChatGPT Image Aug 13, 2026, 11_07_03 AM.png'
 import birthdayImg from '../assets/birthday.png'
 
 interface EventsGridProps {
@@ -98,7 +98,7 @@ export default function EventsGrid({ onNavigate, hideHeader }: EventsGridProps) 
       <div className="absolute inset-0 z-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:32px_32px]"></div>
       
       {/* Elegant Hero Matching Colors - Subtle ambient glowing lights (Lighter than before) */}
-      <div className="absolute top-0 right-1/4 w-[400px] h-[400px] bg-gradient-to-bl from-[#FF7518]/10 to-transparent rounded-full blur-[100px] pointer-events-none z-0" />
+      <div className="absolute top-0 right-1/4 w-[400px] h-[400px] bg-gradient-to-bl from-[#D8B4FE]/10 to-transparent rounded-full blur-[100px] pointer-events-none z-0" />
       <div className="absolute bottom-0 left-0 w-full h-[100px] bg-gradient-to-t from-transparent to-transparent pointer-events-none z-0" />
 
       <div className="max-w-[1400px] mx-auto relative z-10 px-4 sm:px-6 lg:px-8">
@@ -174,7 +174,7 @@ export default function EventsGrid({ onNavigate, hideHeader }: EventsGridProps) 
         {/* Empty State */}
         {!loading && filteredEvents.length === 0 && (
           <div className="text-center py-20 bg-white/50 backdrop-blur-sm border border-black/10 rounded-3xl shadow-sm">
-            <div className="w-14 h-14 mx-auto mb-4 rounded-full bg-[#FFFFFF] text-[#FF7518] flex items-center justify-center border border-[#FF7518]/30">
+            <div className="w-14 h-14 mx-auto mb-4 rounded-full bg-[#FFFFFF] text-[#D8B4FE] flex items-center justify-center border border-[#D8B4FE]/30">
               <svg className="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
               </svg>
@@ -183,7 +183,7 @@ export default function EventsGrid({ onNavigate, hideHeader }: EventsGridProps) 
             <p className="text-gray-500 text-sm max-w-sm mx-auto mb-5">Try adjusting your search or filter.</p>
             <button
               onClick={() => { setSelectedCategory('All'); setSearchQuery('') }}
-              className="bg-gradient-to-r from-[#FF7518] to-[#ff9248] hover:shadow-lg hover:shadow-[#FF7518]/30 text-white px-5 py-2 font-semibold text-sm rounded-xl transition-all cursor-pointer"
+              className="bg-gradient-to-r from-[#D8B4FE] to-[#ff9248] hover:shadow-lg hover:shadow-[#D8B4FE]/30 text-white px-5 py-2 font-semibold text-sm rounded-xl transition-all cursor-pointer"
             >
               Reset Filters
             </button>
@@ -205,11 +205,11 @@ export default function EventsGrid({ onNavigate, hideHeader }: EventsGridProps) 
                 const imageSrc = getOverrideImage(event.category, event.image);
                 return (
                 <div key={event.id} className="w-[300px] sm:w-[340px] lg:w-[380px] shrink-0 snap-center">
-                  <div
-                    className="group bg-white rounded-2xl border border-gray-300 flex flex-col cursor-pointer h-full shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] transition-transform duration-200 hover:-translate-y-1 overflow-hidden"
-                    onClick={() => onNavigate('event-details', event.id)}
-                  >
-                    <div className="h-[180px] sm:h-[220px] w-full relative bg-gray-50 border-b border-gray-300 overflow-hidden">
+                    <div
+                      className="group bg-white rounded-2xl border border-gray-300 flex flex-col cursor-pointer h-full shadow-[8px_8px_0px_0px_#D8B4FE] transition-transform duration-200 hover:-translate-y-1 overflow-hidden"
+                      onClick={() => onNavigate('event-details', event.id)}
+                    >
+                    <div className="h-[180px] sm:h-[220px] w-full relative bg-purple-100 border-b border-gray-300 overflow-hidden">
                       <img
                         src={imageSrc}
                         alt={event.title}

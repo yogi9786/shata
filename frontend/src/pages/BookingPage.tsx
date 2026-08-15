@@ -200,7 +200,7 @@ export default function BookingPage({ preselectedEvent, onNavigate, onBookingSub
                   Engagement / Event Type *
                 </label>
                 {preselectedEvent ? (
-                  <div className="p-4 rounded-2xl bg-orange-50/70 border border-orange-200 flex items-center justify-between">
+                  <div className="p-4 rounded-2xl bg-orange-50/70 border border-[#D8B4FE] flex items-center justify-between">
                     <div>
                       <span className="text-[10px] uppercase tracking-wider font-bold text-orange-600">Selected Event</span>
                       <h4 className="text-base font-bold text-slate-800">{preselectedEvent}</h4>
