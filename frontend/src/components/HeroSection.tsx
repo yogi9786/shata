@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react'
 import type { PageType } from '../App'
 import { useEvents } from '../hooks/useEvents'
 import logoSvg from '../assets/logo.svg'
+import telanganaImg from '../assets/telangana.jpg'
+import andhraPradeshImg from '../assets/andhra_pradesh.jpg'
 
 interface HeroSectionProps {
   scrollY: number
@@ -165,8 +167,70 @@ export default function HeroSection({ onNavigate }: HeroSectionProps) {
 
         {/* Outer Premium Container */}
         <div
-          className="w-full rounded-[1.5rem] sm:rounded-[2.5rem] pt-4 pb-5 px-4 sm:pt-6 sm:pb-8 sm:px-8 lg:pt-5 lg:pb-6 lg:px-8 border border-black/20 bg-[#FFFFFF] shadow-[0_20px_60px_rgba(23,32,51,0.06)] flex flex-col relative overflow-hidden transition-all duration-300 min-h-[580px] sm:min-h-[640px] lg:min-h-[600px]"
+          className="w-full rounded-[1.5rem] sm:rounded-[2.5rem] pt-4 pb-5 px-4 sm:pt-6 sm:pb-8 sm:px-8 lg:pt-5 lg:pb-6 lg:px-8 border border-black/20 bg-[#FFF8F3] shadow-[0_20px_60px_rgba(23,32,51,0.06)] flex flex-col relative overflow-hidden transition-all duration-300 min-h-[580px] sm:min-h-[640px] lg:min-h-[600px]"
         >
+          {/* ======================================================== */}
+          {/* PREMIUM DOT-GRID BACKGROUND PATTERN                      */}
+          {/* ======================================================== */}
+          <div className="absolute inset-0 z-0 pointer-events-none opacity-[0.35]" style={{ backgroundImage: 'radial-gradient(circle, #E86F32 0.8px, transparent 0.8px)', backgroundSize: '20px 20px' }} />
+          {/* EVENT-RELATED BACKGROUND DESIGN ELEMENTS                 */}
+          {/* ======================================================== */}
+          <style>{`
+            @keyframes float-slow {
+              0%, 100% { transform: translateY(0px) rotate(0deg); }
+              50% { transform: translateY(-6px) rotate(2deg); }
+            }
+            @keyframes float-delayed {
+              0%, 100% { transform: translateY(0px) rotate(0deg); }
+              50% { transform: translateY(6px) rotate(-2deg); }
+            }
+            .animate-float-slow {
+              animation: float-slow 7s ease-in-out infinite;
+            }
+            .animate-float-delayed {
+              animation: float-delayed 9s ease-in-out infinite;
+            }
+          `}</style>
+
+          {/* Top Right Celebration Sparkles / Streamer */}
+          <div className="absolute top-20 right-6 w-28 h-28 pointer-events-none opacity-[0.14] hidden md:block select-none z-0 animate-float-slow">
+            <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-[#E86F32]">
+              <defs>
+                <radialGradient id="glow-tr" cx="50%" cy="50%" r="50%">
+                  <stop offset="0%" stopColor="#E86F32" stopOpacity="0.4" />
+                  <stop offset="100%" stopColor="#E86F32" stopOpacity="0" />
+                </radialGradient>
+              </defs>
+              <circle cx="50" cy="40" r="35" fill="url(#glow-tr)" />
+              <path d="M10 80 Q 30 40 65 60 T 95 20" stroke="currentColor" strokeWidth="1.2" strokeDasharray="3 3" />
+              <path d="M50 15 Q 50 28 37 28 Q 50 28 50 41 Q 50 28 63 28 Q 50 28 50 15" fill="currentColor" />
+              <path d="M25 45 Q 25 51 19 51 Q 25 51 25 57 Q 25 51 31 51 Q 25 51 25 45" fill="currentColor" className="opacity-70" />
+              <circle cx="75" cy="30" r="2" fill="currentColor" />
+              <circle cx="35" cy="20" r="1.5" fill="currentColor" />
+              <circle cx="70" cy="65" r="3" stroke="currentColor" strokeWidth="1" />
+            </svg>
+          </div>
+
+          {/* Bottom Left Celebration Balloons / Sparkles */}
+          <div className="absolute bottom-20 left-6 w-32 h-32 pointer-events-none opacity-[0.14] hidden md:block select-none z-0 animate-float-delayed">
+            <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-[#E86F32]">
+              <defs>
+                <radialGradient id="glow-bl" cx="50%" cy="50%" r="50%">
+                  <stop offset="0%" stopColor="#E86F32" stopOpacity="0.3" />
+                  <stop offset="100%" stopColor="#E86F32" stopOpacity="0" />
+                </radialGradient>
+              </defs>
+              <circle cx="60" cy="60" r="45" fill="url(#glow-bl)" />
+              <circle cx="45" cy="45" r="18" stroke="currentColor" strokeWidth="1.5" />
+              <path d="M45 63 Q 40 80 50 98" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
+              <circle cx="72" cy="53" r="16" stroke="currentColor" strokeWidth="1.5" />
+              <path d="M72 69 Q 77 86 67 104" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
+              <path d="M15 25 L23 25 M19 21 L19 29" stroke="currentColor" strokeWidth="1.2" />
+              <path d="M102 22 L108 22 M105 19 L105 25" stroke="currentColor" strokeWidth="1.2" />
+              <circle cx="95" cy="45" r="1.5" fill="currentColor" />
+              <circle cx="20" cy="55" r="2" stroke="currentColor" strokeWidth="1" />
+            </svg>
+          </div>
           {/* ======================================================== */}
           {/* BROWSER HEADER SECTION — macOS Safari style               */}
           {/* ======================================================== */}
@@ -522,7 +586,7 @@ export default function HeroSection({ onNavigate }: HeroSectionProps) {
                       >
                         <div className="h-22 relative overflow-hidden rounded-t-[15px]">
                           <img
-                            src="https://images.unsplash.com/photo-1605371924599-2c03d64d0dd3?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                            src={telanganaImg}
                             alt="Telangana"
                             className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-[300ms]"
                           />
@@ -549,7 +613,7 @@ export default function HeroSection({ onNavigate }: HeroSectionProps) {
                       >
                         <div className="h-22 relative overflow-hidden rounded-t-[15px]">
                           <img
-                            src="https://images.unsplash.com/photo-1590001155093-a3c66ab0c3ff?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                            src={andhraPradeshImg}
                             alt="Andhra Pradesh"
                             className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-[300ms]"
                           />

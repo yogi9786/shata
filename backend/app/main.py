@@ -88,8 +88,6 @@ SEED_EVENTS = [
     "duration": "3 Days / 2 Nights",
     "organizer": "Shata Luxury Weddings",
     "highlights": ["Palace Mandap Setup", "4K Drone & Cinematography", "Royal Banquet Feast", "Traditional Musicians"],
-    "featured": True,
-    "isPopular": True
   },
   {
     "id": 4,
