@@ -172,9 +172,7 @@ export default function HeroSection({ onNavigate }: HeroSectionProps) {
           {/* ======================================================== */}
           {/* PREMIUM DOT-GRID BACKGROUND PATTERN                      */}
           {/* ======================================================== */}
-          <div className="absolute inset-0 z-0 pointer-events-none opacity-[0.35]" style={{ backgroundImage: 'radial-gradient(circle, #E86F32 0.8px, transparent 0.8px)', backgroundSize: '20px 20px' }} />
-          {/* EVENT-RELATED BACKGROUND DESIGN ELEMENTS                 */}
-          {/* ======================================================== */}
+          <div className="absolute inset-0 z-0 pointer-events-none opacity-[0.35]" style={{ backgroundImage: 'radial-gradient(circle, rgba(232, 111, 50, 0.16) 0.8px, transparent 0.8px)', backgroundSize: '20px 20px' }} />
           <style>{`
             @keyframes float-slow {
               0%, 100% { transform: translateY(0px) rotate(0deg); }
@@ -184,11 +182,21 @@ export default function HeroSection({ onNavigate }: HeroSectionProps) {
               0%, 100% { transform: translateY(0px) rotate(0deg); }
               50% { transform: translateY(6px) rotate(-2deg); }
             }
+            @keyframes wave-horizontal {
+              0% { transform: translateX(0); }
+              100% { transform: translateX(-50%); }
+            }
             .animate-float-slow {
               animation: float-slow 7s ease-in-out infinite;
             }
             .animate-float-delayed {
               animation: float-delayed 9s ease-in-out infinite;
+            }
+            .animate-wave-slow {
+              animation: wave-horizontal 22s linear infinite;
+            }
+            .animate-wave-medium {
+              animation: wave-horizontal 15s linear infinite;
             }
           `}</style>
 
@@ -229,6 +237,56 @@ export default function HeroSection({ onNavigate }: HeroSectionProps) {
               <path d="M102 22 L108 22 M105 19 L105 25" stroke="currentColor" strokeWidth="1.2" />
               <circle cx="95" cy="45" r="1.5" fill="currentColor" />
               <circle cx="20" cy="55" r="2" stroke="currentColor" strokeWidth="1" />
+            </svg>
+          </div>
+
+          {/* ======================================================== */}
+          {/* LOOPS & WAVES PREMIUM BACKGROUND DESIGN                  */}
+          {/* ======================================================== */}
+          {/* Middle Wavy Stroke Lines (Guaranteed Visible behind text & search) */}
+          <div className="absolute inset-x-0 top-[15%] h-80 pointer-events-none overflow-hidden z-0 select-none opacity-45">
+            {/* Wave Line 1: Dashed gradient track */}
+            <svg className="absolute w-[200%] h-full animate-wave-slow" viewBox="0 0 2000 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M0,70 C250,140 500,10 750,70 C1000,140 1250,10 1500,70 C1750,140 2000,10 2250,70"
+                stroke="url(#wave-gradient-1)"
+                strokeWidth="2.5"
+                strokeDasharray="8 4"
+              />
+              <defs>
+                <linearGradient id="wave-gradient-1" x1="0" y1="0" x2="2000" y2="0" gradientUnits="userSpaceOnUse">
+                  <stop offset="0%" stopColor="#E86F32" stopOpacity="0.1" />
+                  <stop offset="50%" stopColor="#E86F32" stopOpacity="0.7" />
+                  <stop offset="100%" stopColor="#E86F32" stopOpacity="0.1" />
+                </linearGradient>
+              </defs>
+            </svg>
+            {/* Wave Line 2: Solid thin track offset */}
+            <svg className="absolute w-[200%] h-full animate-wave-medium" viewBox="0 0 2000 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M0,110 C300,40 600,160 900,110 C1200,40 1500,160 1800,110 C2100,40 2400,160 2700,110"
+                stroke="#E86F32"
+                strokeWidth="1.5"
+                className="opacity-25"
+              />
+            </svg>
+          </div>
+
+          {/* Bottom Wavy Fills (Taller so they rise above cards) */}
+          <div className="absolute inset-x-0 bottom-0 h-80 pointer-events-none overflow-hidden z-0 select-none opacity-60">
+            <svg className="absolute bottom-0 w-[200%] h-full animate-wave-slow" viewBox="0 0 2000 120" preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M0,60 C150,100 350,20 500,60 C650,100 850,20 1000,60 C1150,100 1350,20 1500,60 C1650,100 1850,20 2000,60 L2000,120 L0,120 Z"
+                fill="#E86F32"
+                className="opacity-[0.09]"
+              />
+            </svg>
+            <svg className="absolute bottom-0 w-[200%] h-full animate-wave-medium" viewBox="0 0 2000 120" preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M0,80 C200,45 350,105 500,80 C650,55 800,115 1000,80 C1150,55 1300,115 1500,80 C1650,55 1800,115 2000,80 L2000,120 L0,120 Z"
+                fill="#E86F32"
+                className="opacity-[0.14]"
+              />
             </svg>
           </div>
           {/* ======================================================== */}
@@ -450,9 +508,9 @@ export default function HeroSection({ onNavigate }: HeroSectionProps) {
                 {/* ==================================================== */}
                 {/* FLOATING SEARCH BAR                                  */}
                 {/* ==================================================== */}
-                <div className="w-full rounded-[16px] sm:rounded-[18px] p-2 sm:p-2.5 bg-white border-2 border-[#E86F32] shadow-[0_10px_30px_rgba(232,111,50,0.12)] flex flex-col sm:flex-row items-stretch sm:items-center gap-2 mb-4 sm:mb-8 lg:mb-6 transition-all duration-[220ms]">
+                <div className="w-full rounded-[16px] sm:rounded-[18px] p-2 sm:p-2.5 bg-transparent border-2 border-[#E86F32] shadow-[0_10px_30px_rgba(232,111,50,0.06)] flex flex-col sm:flex-row items-stretch sm:items-center gap-2 mb-4 sm:mb-8 lg:mb-6 transition-all duration-[220ms]">
                   {/* Location field */}
-                  <div className="flex-1 flex items-center gap-3 px-3.5 py-2.5 rounded-xl bg-white border border-black/10 sm:border-r sm:border-y-0 sm:border-l-0 sm:rounded-none sm:bg-transparent sm:border-r-black/10 transition-colors">
+                  <div className="flex-1 flex items-center gap-3 px-3.5 py-2.5 rounded-xl bg-transparent border border-black/10 sm:border-r sm:border-y-0 sm:border-l-0 sm:rounded-none sm:bg-transparent sm:border-r-black/10 transition-colors">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" className="flex-shrink-0 stroke-[#E86F32]" strokeWidth="2.2">
                       <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" />
                       <circle cx="12" cy="9" r="2.5" />
@@ -470,7 +528,7 @@ export default function HeroSection({ onNavigate }: HeroSectionProps) {
                   </div>
 
                   {/* Event Type field */}
-                  <div className="flex-1 flex items-center gap-3 px-3.5 py-2.5 rounded-xl bg-white border border-black/10 sm:border-r sm:border-y-0 sm:border-l-0 sm:rounded-none sm:bg-transparent sm:border-r-black/10 transition-colors">
+                  <div className="flex-1 flex items-center gap-3 px-3.5 py-2.5 rounded-xl bg-transparent border border-black/10 sm:border-r sm:border-y-0 sm:border-l-0 sm:rounded-none sm:bg-transparent sm:border-r-black/10 transition-colors">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" className="flex-shrink-0 stroke-[#E86F32]" strokeWidth="2.2">
                       <path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z" />
                     </svg>
@@ -487,7 +545,7 @@ export default function HeroSection({ onNavigate }: HeroSectionProps) {
                   </div>
 
                   {/* Date field */}
-                  <div className="flex-1 flex items-center gap-3 px-3.5 py-2.5 rounded-xl bg-white border border-black/10 sm:border-none sm:rounded-none sm:bg-transparent transition-colors">
+                  <div className="flex-1 flex items-center gap-3 px-3.5 py-2.5 rounded-xl bg-transparent border border-black/10 sm:border-none sm:rounded-none sm:bg-transparent transition-colors">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" className="flex-shrink-0 stroke-[#E86F32]" strokeWidth="2.2">
                       <rect x="3" y="4" width="18" height="18" rx="2" />
                       <path d="M16 2v4M8 2v4M3 10h18" strokeLinecap="round" />
@@ -528,7 +586,7 @@ export default function HeroSection({ onNavigate }: HeroSectionProps) {
 
                   {/* Widget 1: Featured Events Card (Left Column) */}
                   <div className="flex flex-col gap-4">
-                    <div className="rounded-[16px] sm:rounded-[18px] p-4 sm:p-5 bg-[#FFFFFF] border border-black/15 shadow-[0_8px_30px_rgba(23,32,51,0.05)] flex flex-col h-full transition-all duration-300">
+                    <div className="rounded-[16px] sm:rounded-[18px] p-4 sm:p-5 bg-transparent border border-black/15 shadow-[0_8px_30px_rgba(23,32,51,0.02)] flex flex-col h-full transition-all duration-300">
                       <div className="flex justify-between items-center mb-3 sm:mb-4">
                         <h3 className="font-bold text-sm text-[#172033] font-jakarta">Featured Events</h3>
                         <span className="text-[11px] font-semibold px-2.5 py-1 rounded-full bg-[#FFF1E8] text-[#E86F32]">
@@ -543,7 +601,7 @@ export default function HeroSection({ onNavigate }: HeroSectionProps) {
                           <div
                             key={event.id}
                             onClick={() => onNavigate('event-details', event.id)}
-                            className="group p-3 rounded-[16px] bg-[#FFFFFF] border border-black/10 shadow-[0_4px_16px_rgba(23,32,51,0.04)] hover:shadow-[0_8px_24px_rgba(23,32,51,0.08)] hover:border-black/20 mb-3 transition-all duration-[250ms] ease-out cursor-pointer flex gap-3 hover:-translate-y-[3px]"
+                            className="group p-3 rounded-[16px] bg-[#FFFDFC]/40 backdrop-blur-xs border border-black/10 shadow-[0_4px_16px_rgba(23,32,51,0.02)] hover:shadow-[0_8px_24px_rgba(23,32,51,0.06)] hover:border-black/20 mb-3 transition-all duration-[250ms] ease-out cursor-pointer flex gap-3 hover:-translate-y-[3px]"
                           >
                             <img src={event.image} alt={event.title} className="w-16 h-16 rounded-xl object-cover flex-shrink-0 group-hover:scale-[1.03] transition-transform duration-[300ms]" />
                             <div className="flex-1 min-w-0">
@@ -564,7 +622,7 @@ export default function HeroSection({ onNavigate }: HeroSectionProps) {
                   </div>
 
                   {/* Widget 2: Featured Venues Discovery Card (Right Column) */}
-                  <div className="md:col-span-2 rounded-[16px] sm:rounded-[18px] p-4 sm:p-6 bg-[#FFFFFF] border border-black/15 shadow-[0_8px_30px_rgba(23,32,51,0.05)] relative flex flex-col transition-all duration-300">
+                  <div className="md:col-span-2 rounded-[16px] sm:rounded-[18px] p-4 sm:p-6 bg-transparent border border-black/15 shadow-[0_8px_30px_rgba(23,32,51,0.02)] relative flex flex-col transition-all duration-300">
                     <div className="flex justify-between items-center mb-4 sm:mb-5">
                       <div>
                         <h3 className="font-bold text-base sm:text-lg text-[#172033] font-jakarta">Featured Locations</h3>
@@ -582,7 +640,7 @@ export default function HeroSection({ onNavigate }: HeroSectionProps) {
                       {/* Location Card 1: Telangana */}
                       <div
                         onClick={() => onNavigate('events', 'Telangana')}
-                        className="group rounded-[16px] overflow-hidden bg-[#FFFFFF] border border-black/10 shadow-[0_4px_16px_rgba(23,32,51,0.04)] hover:shadow-[0_8px_24px_rgba(23,32,51,0.08)] hover:border-black/20 cursor-pointer transition-all duration-[250ms] ease-out flex-1 flex flex-col hover:-translate-y-[3px]"
+                        className="group rounded-[16px] overflow-hidden bg-[#FFFDFC]/40 backdrop-blur-xs border border-black/10 shadow-[0_4px_16px_rgba(23,32,51,0.02)] hover:shadow-[0_8px_24px_rgba(23,32,51,0.06)] hover:border-black/20 cursor-pointer transition-all duration-[250ms] ease-out flex-1 flex flex-col hover:-translate-y-[3px]"
                       >
                         <div className="h-22 relative overflow-hidden rounded-t-[15px]">
                           <img
@@ -609,7 +667,7 @@ export default function HeroSection({ onNavigate }: HeroSectionProps) {
                       {/* Location Card 2: Andhra Pradesh */}
                       <div
                         onClick={() => onNavigate('events', 'Andhra Pradesh')}
-                        className="group rounded-[16px] overflow-hidden bg-[#FFFFFF] border border-black/10 shadow-[0_4px_16px_rgba(23,32,51,0.04)] hover:shadow-[0_8px_24px_rgba(23,32,51,0.08)] hover:border-black/20 cursor-pointer transition-all duration-[250ms] ease-out flex-1 flex flex-col hover:-translate-y-[3px]"
+                        className="group rounded-[16px] overflow-hidden bg-[#FFFDFC]/40 backdrop-blur-xs border border-black/10 shadow-[0_4px_16px_rgba(23,32,51,0.02)] hover:shadow-[0_8px_24px_rgba(23,32,51,0.06)] hover:border-black/20 cursor-pointer transition-all duration-[250ms] ease-out flex-1 flex flex-col hover:-translate-y-[3px]"
                       >
                         <div className="h-22 relative overflow-hidden rounded-t-[15px]">
                           <img

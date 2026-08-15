@@ -137,6 +137,12 @@ body {
   background-size: 4rem 4rem;
 }
 
+/* Premium dot texture (light orange) */
+.dot-texture-light {
+  background-image: radial-gradient(circle, rgba(232, 111, 50, 0.14) 0.8px, transparent 0.8px);
+  background-size: 20px 20px;
+}
+
 /* Bottom accent bar on card */
 .card-accent-bottom::after {
   content: '';

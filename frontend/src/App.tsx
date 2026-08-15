@@ -158,7 +158,7 @@ function App() {
         <div className="absolute -bottom-[20%] left-[20%] w-[70vw] h-[70vw] rounded-full bg-gradient-to-tr from-slate-200/30 via-[#D4AF37]/10 to-transparent blur-[160px] animate-pulse" style={{ animationDuration: '12s', animationDelay: '4s' }} />
         
         {/* Subtle noise/grid texture */}
-        <div className="absolute inset-0 grid-texture-light opacity-60" />
+        <div className="absolute inset-0 dot-texture-light opacity-[0.25]" />
       </div>
 
       <div className="relative z-10 flex flex-col min-h-screen justify-between">

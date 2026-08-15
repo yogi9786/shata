@@ -12,7 +12,7 @@ export default function EventsPage({ onNavigate }: EventsPageProps) {
       <div className="relative overflow-hidden bg-transparent pt-28 sm:pt-32 pb-10 sm:pb-14">
         {/* Warm ambient glows */}
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[300px] bg-gradient-to-b from-[#F3E5AB]/40 via-slate-100/30 to-transparent rounded-full blur-[100px] pointer-events-none" />
-        <div className="absolute inset-0 grid-texture-light opacity-50 pointer-events-none" />
+        <div className="absolute inset-0 dot-texture-light opacity-[0.25] pointer-events-none" />
 
         <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 text-center">
           <div className="pill-gold mx-auto mb-5" style={{ width: 'fit-content' }}>
