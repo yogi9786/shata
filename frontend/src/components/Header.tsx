@@ -159,7 +159,7 @@ export default function Header({ scrollY, currentPage, onNavigate, currentUser, 
               href="https://play.google.com/store/apps/details?id=com.shata.partner"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[13px] font-semibold px-4 py-2 bg-black hover:bg-[#E86F32] text-white rounded-xl transition-all duration-300 tracking-tight cursor-pointer"
+              className="text-[12px] font-bold px-4 py-2 bg-black border-none text-white tracking-tight rounded-none shadow-[3px_3px_0px_#E86F32] hover:translate-x-[3px] hover:translate-y-[3px] hover:shadow-none transition-all duration-150 ease-in-out cursor-pointer font-jakarta"
             >
               PARTNER WITH US
             </a>

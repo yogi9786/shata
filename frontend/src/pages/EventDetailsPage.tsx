@@ -160,9 +160,9 @@ export default function EventDetailsPage({ eventId, onNavigate }: EventDetailsPa
               {/* Premium Solid Black CTA Button */}
               <button 
                 onClick={() => onNavigate('booking', event.title)}
-                className="w-full py-3.5 px-6 bg-black hover:bg-[#E86F32] text-white rounded-2xl font-bold text-sm sm:text-base shadow-md hover:shadow-orange-500/10 active:scale-[0.99] transition-all duration-300 cursor-pointer text-center"
+                className="w-full py-3.5 px-6 bg-black border-none text-white font-bold tracking-tight rounded-none shadow-[4px_4px_0px_#E86F32] hover:translate-x-[4px] hover:translate-y-[4px] hover:shadow-none transition-all duration-150 ease-in-out cursor-pointer text-center text-sm sm:text-base font-jakarta"
               >
-                Book Now
+                Book Now →
               </button>
 
               <div className="mt-6 text-center text-[10px] sm:text-xs text-slate-500 font-medium space-y-1">

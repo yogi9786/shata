@@ -181,9 +181,9 @@ export default function CareersPage({ onNavigate }: CareersPageProps) {
                   
                   <button
                     onClick={() => handleApplyClick(job.title)}
-                    className="w-full py-2.5 bg-black hover:bg-[#E86F32] text-white rounded-xl font-bold text-xs sm:text-sm transition-all duration-300 hover:scale-[1.02] cursor-pointer"
+                    className="w-full py-2.5 bg-black border-none text-white font-bold tracking-tight rounded-none shadow-[3px_3px_0px_#E86F32] hover:translate-x-[3px] hover:translate-y-[3px] hover:shadow-none transition-all duration-150 ease-in-out cursor-pointer text-xs sm:text-sm font-jakarta"
                   >
-                    Apply for this Role
+                    Apply for this Role →
                   </button>
                 </div>
               ))}
@@ -305,9 +305,9 @@ export default function CareersPage({ onNavigate }: CareersPageProps) {
                 <button
                   type="submit"
                   disabled={status === 'submitting'}
-                  className="w-full py-3 bg-[#E86F32] hover:bg-[#D96129] text-white rounded-xl font-bold text-sm transition-all duration-300 hover:scale-[1.01] shadow-[0_6px_20px_rgba(232,111,50,0.2)] disabled:bg-slate-400 disabled:shadow-none cursor-pointer"
+                  className="w-full py-3 bg-[#E86F32] hover:bg-[#D96129] border-none text-white font-bold tracking-tight rounded-none shadow-[4px_4px_0px_#000000] hover:translate-x-[4px] hover:translate-y-[4px] hover:shadow-none transition-all duration-150 ease-in-out disabled:bg-slate-400 disabled:shadow-none cursor-pointer font-jakarta text-sm sm:text-base"
                 >
-                  {status === 'submitting' ? 'Submitting Application...' : 'Submit Application'}
+                  {status === 'submitting' ? 'Submitting Application...' : 'Submit Application →'}
                 </button>
               </form>
             )}

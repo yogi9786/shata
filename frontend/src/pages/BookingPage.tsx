@@ -440,11 +440,11 @@ export default function BookingPage({ preselectedEvent, onNavigate, onBookingSub
                   </div>
                 )}
 
-                {/* Submit Button (Changed to Premium Black with Orange Hover) */}
+                {/* Submit Button (Hero Section Style Black Button with Orange Offset Shadow) */}
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full py-3.5 rounded-2xl bg-black hover:bg-[#E86F32] active:scale-[0.98] text-white font-bold text-sm tracking-wide shadow-md hover:shadow-orange-500/10 transition-all duration-300 cursor-pointer flex items-center justify-center gap-2"
+                  className="w-full py-3.5 bg-black border-none text-white font-bold tracking-tight rounded-none shadow-[4px_4px_0px_#E86F32] hover:translate-x-[4px] hover:translate-y-[4px] hover:shadow-none transition-all duration-150 ease-in-out cursor-pointer flex items-center justify-center gap-2 font-jakarta text-sm sm:text-base"
                 >
                   {isSubmitting ? (
                     <>

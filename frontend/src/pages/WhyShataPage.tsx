@@ -1,5 +1,6 @@
 import type { PageType } from '../App'
 import WhyChooseShata from '../components/WhyChooseShata'
+import AppDownloadSection from '../components/AppDownloadSection'
 
 interface WhyShataPageProps {
   onNavigate?: (page: PageType, context?: string | number) => void
@@ -34,9 +35,11 @@ export default function WhyShataPage({}: WhyShataPageProps) {
         </div>
       </div>
 
-      <div className="pb-20">
+      <div>
         <WhyChooseShata />
       </div>
+
+      <AppDownloadSection />
     </div>
   )
 }

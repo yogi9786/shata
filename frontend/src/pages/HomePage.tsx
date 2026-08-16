@@ -4,6 +4,7 @@ import VideoSection from '../components/VideoSection'
 import VendorMarketplace from '../components/VendorMarketplace'
 import EventShowcaseCarousel from '../components/EventShowcaseCarousel'
 import WhyChooseShata from '../components/WhyChooseShata'
+import AppDownloadSection from '../components/AppDownloadSection'
 import type { PageType } from '../App'
 
 interface HomePageProps {
@@ -20,6 +21,7 @@ export default function HomePage({ scrollY, progress, onNavigate }: HomePageProp
       <VideoSection />
       <VendorMarketplace onNavigate={onNavigate} />
       <WhyChooseShata />
+      <AppDownloadSection />
       <EventShowcaseCarousel onNavigate={onNavigate} />
     </>
   )
