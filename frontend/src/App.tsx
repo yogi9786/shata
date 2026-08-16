@@ -148,10 +148,10 @@ function App() {
   }
 
   return (
-    <div className="min-h-screen bg-[#FAFAF8] text-slate-900 antialiased overflow-x-hidden relative font-geist">
+    <div className="min-h-screen bg-[#FFF8F3] text-slate-900 antialiased overflow-x-hidden relative font-geist">
       {/* Global Premium Glassmorphism Background */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
-        <div className="absolute inset-0 bg-[#FAFAF8] opacity-90 mix-blend-overlay" />
+        <div className="absolute inset-0 bg-[#FFF8F3] opacity-90 mix-blend-overlay" />
         
         {/* Dynamic mesh gradients - Champagne/Silver/Gold */}
         <div className="absolute -top-[10%] -left-[10%] w-[60vw] h-[60vw] rounded-full bg-gradient-to-br from-[#D4AF37]/15 via-slate-200/40 to-transparent blur-[120px] animate-pulse" style={{ animationDuration: '8s' }} />

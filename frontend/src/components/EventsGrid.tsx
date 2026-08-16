@@ -20,6 +20,92 @@ interface EventsGridProps {
   hideHeader?: boolean
 }
 
+interface MockServiceItem {
+  id: number
+  title: string
+  category: string
+  location: string
+  rating: number
+  reviewsCount: number
+  description: string
+  image: string
+  tag?: string
+}
+
+// Custom curated listings for Photography
+const photographyItems: MockServiceItem[] = [
+  {
+    id: 101,
+    title: "Cinematic Pre-Wedding Shoot",
+    category: "Photography",
+    location: "Goa & Udaipur",
+    rating: 4.98,
+    reviewsCount: 240,
+    tag: "Romance & Art",
+    description: "Capture your love story with breathtaking cinematic videos and premium beachfront portraiture.",
+    image: proposalImg,
+  },
+  {
+    id: 102,
+    title: "Premium Wedding Photography",
+    category: "Photography",
+    location: "Pan-India Coverage",
+    rating: 4.99,
+    reviewsCount: 512,
+    tag: "Eternal Memories",
+    description: "High-end traditional and candid coverage with custom luxury photo albums and cinematic trailers.",
+    image: familyFunctionsImg,
+  },
+  {
+    id: 103,
+    title: "Corporate Event Coverage",
+    category: "Photography",
+    location: "Metro Cities",
+    rating: 4.91,
+    reviewsCount: 88,
+    tag: "Professional AV",
+    description: "High-definition multi-camera live streaming, highlight reels, and professional delegate portraits.",
+    image: corporateImg,
+  }
+]
+
+// Custom curated listings for Catering
+const cateringItems: MockServiceItem[] = [
+  {
+    id: 201,
+    title: "Royal Rajputana Buffet",
+    category: "Catering",
+    location: "Rajasthan & Delhi NCR",
+    rating: 4.99,
+    reviewsCount: 310,
+    tag: "Heritage Feast",
+    description: "Experience authentic royal heritage delicacies prepared by master khansamas.",
+    image: anniversaryImg,
+  },
+  {
+    id: 202,
+    title: "Gourmet Live Food Counters",
+    category: "Catering",
+    location: "Pan-India Coverage",
+    rating: 4.94,
+    reviewsCount: 175,
+    tag: "Interactive Dining",
+    description: "Global fusion stations, live teppanyaki, wood-fired artisanal pizzas, and custom dessert bars.",
+    image: preReleaseImg,
+  },
+  {
+    id: 203,
+    title: "Premium Mixology & Bar Service",
+    category: "Catering",
+    location: "Metro Cities",
+    rating: 4.88,
+    reviewsCount: 142,
+    tag: "Visual Drinks",
+    description: "Exotic fruit mocktails, dry ice infusions, and visual molecular mixology counters.",
+    image: publicEventsImg,
+  }
+]
+
 const getOverrideImage = (title: string, category: string, originalImage: string) => {
   const t = title.toLowerCase()
   const c = category.toLowerCase()
@@ -40,23 +126,27 @@ const getOverrideImage = (title: string, category: string, originalImage: string
 
 export default function EventsGrid({ onNavigate, hideHeader }: EventsGridProps) {
   const { events: featuredEvents, loading } = useEvents()
-  const [selectedCategory, setSelectedCategory] = useState<string>('All')
+  const [selectedCategory, setSelectedCategory] = useState<string>('Events')
   const [searchQuery, setSearchQuery] = useState('')
   const [isPaused, setIsPaused] = useState(false)
 
-  const categories = useMemo(() => {
-    return ['All', ...Array.from(new Set(featuredEvents.map((item) => item.category)))]
-  }, [featuredEvents])
+  const categories = ['Events', 'Photography', 'Catering']
 
   const filteredEvents = useMemo(() => {
-    return featuredEvents.filter((item) => {
-      const matchCat = selectedCategory === 'All' || item.category === selectedCategory
+    let baseList = featuredEvents
+    if (selectedCategory === 'Photography') {
+      baseList = photographyItems
+    } else if (selectedCategory === 'Catering') {
+      baseList = cateringItems
+    }
+
+    return baseList.filter((item) => {
       const matchSearch =
         item.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
         item.location.toLowerCase().includes(searchQuery.toLowerCase()) ||
         item.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
         (item.tag || '').toLowerCase().includes(searchQuery.toLowerCase())
-      return matchCat && matchSearch
+      return matchSearch
     })
   }, [selectedCategory, searchQuery, featuredEvents])
 
@@ -206,8 +296,6 @@ export default function EventsGrid({ onNavigate, hideHeader }: EventsGridProps) 
     return () => clearInterval(interval)
   }, [isPaused, loading, filteredEvents.length])
 
-
-
   return (
     <section id="events-grid" className="w-full bg-[#FFF8F3] font-jakarta relative py-12 sm:py-20 overflow-hidden">
 
@@ -216,16 +304,16 @@ export default function EventsGrid({ onNavigate, hideHeader }: EventsGridProps) 
         {/* ── Section Header ── */}
         {!hideHeader && (
           <div className="mb-10 sm:mb-14">
-            <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-4">
+            <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-2 sm:gap-4 mb-3 sm:mb-4">
               <div>
-                <div className="text-black font-semibold text-sm uppercase tracking-widest mb-3">
+                <div className="text-black font-semibold text-xs sm:text-sm uppercase tracking-widest mb-1.5 sm:mb-3">
                   Curated Experiences 2026
                 </div>
-                <h2 className="font-jakarta text-3xl sm:text-5xl lg:text-[40px] font-bold leading-[1.1] mb-3 sm:mb-5 lg:mb-3 tracking-tight text-black">
+                <h2 className="font-jakarta text-3xl sm:text-5xl lg:text-[40px] font-bold leading-[1.1] mb-1.5 sm:mb-5 lg:mb-3 tracking-tight text-black">
                   Book Events
                 </h2>
               </div>
-              <p className="text-black text-sm leading-relaxed font-medium max-w-xs sm:text-right">
+              <p className="text-black text-xs sm:text-sm leading-relaxed font-medium max-w-xs sm:text-right">
                 Handpicked luxury weddings, concerts, gourmet dining and corporate galas.
               </p>
             </div>
@@ -255,8 +343,8 @@ export default function EventsGrid({ onNavigate, hideHeader }: EventsGridProps) 
             )}
           </div>
 
-          {/* Category Pills */}
-          <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar flex-1">
+          {/* Category Pills - Optimized for touch scrolling on Mobile */}
+          <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar w-full sm:flex-1 py-1 touch-pan-x scroll-smooth">
             {categories.map((cat) => {
               const isActive = selectedCategory === cat
               return (
@@ -269,7 +357,7 @@ export default function EventsGrid({ onNavigate, hideHeader }: EventsGridProps) 
                       : 'bg-white text-black hover:bg-gray-50 border-black/30 hover:border-black shadow-sm'
                   }`}
                 >
-                  {cat === 'All' ? 'All Events' : cat}
+                  {cat}
                 </button>
               )
             })}
@@ -277,22 +365,22 @@ export default function EventsGrid({ onNavigate, hideHeader }: EventsGridProps) 
 
           {/* Count badge */}
           <span className="text-xs font-semibold text-gray-600 bg-white border border-gray-200 px-4 py-2 rounded-lg whitespace-nowrap flex-shrink-0 shadow-sm hidden sm:block">
-            {filteredEvents.length} events
+            {filteredEvents.length} items
           </span>
         </div>
 
         {/* Empty State */}
         {!loading && filteredEvents.length === 0 && (
-          <div className="text-center py-20 bg-white/50 backdrop-blur-sm border border-black/10 rounded-3xl shadow-sm">
+          <div className="text-center py-20 bg-white/50 backdrop-blur-sm border border-black/10 rounded-3xl shadow-sm animate-in fade-in duration-300">
             <div className="w-14 h-14 mx-auto mb-4 rounded-full bg-[#FFFFFF] text-black flex items-center justify-center border border-black/20">
-              <svg className="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
+              <svg className="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
               </svg>
             </div>
-            <h3 className="font-geist text-lg font-semibold text-black mb-1">No events found</h3>
+            <h3 className="font-geist text-lg font-semibold text-black mb-1">No items found</h3>
             <p className="text-gray-500 text-sm max-w-sm mx-auto mb-5">Try adjusting your search or filter.</p>
             <button
-              onClick={() => { setSelectedCategory('All'); setSearchQuery('') }}
+              onClick={() => { setSelectedCategory('Events'); setSearchQuery('') }}
               className="bg-black hover:bg-black/90 hover:shadow-lg text-white px-5 py-2 font-semibold text-sm rounded-xl transition-all cursor-pointer"
             >
               Reset Filters
@@ -300,12 +388,14 @@ export default function EventsGrid({ onNavigate, hideHeader }: EventsGridProps) 
           </div>
         )}
 
-        {/* ── Cards Grid (Auto-scroll on Desktop & Mobile) ── */}
+        {/* ── Featured Horizontal Scroll Carousel ── */}
         {loading ? (
-          <LogoLoader text="Loading Experiences..." />
+          <div className="flex flex-col items-center justify-center py-20">
+            <LogoLoader size="md" text="Loading items..." />
+          </div>
         ) : (
-          <div className="relative -mx-4 sm:mx-0">
-            {filteredEvents.length > 0 && (
+          <div className="relative group/container">
+            {filteredEvents.length > 1 && (
               <>
                 {/* Left Arrow Icon - Large Screen Only */}
                 <button
@@ -365,17 +455,17 @@ export default function EventsGrid({ onNavigate, hideHeader }: EventsGridProps) 
                       />
                     </div>
 
-                    <div className="p-5 flex flex-col flex-1 bg-white">
-                      <h4 className="font-jakarta text-lg font-bold text-black leading-tight line-clamp-1 mb-1.5">
+                    <div className="p-4 sm:p-5 flex flex-col flex-1 bg-white">
+                      <h4 className="font-jakarta text-base sm:text-lg font-bold text-black leading-tight line-clamp-1 mb-1">
                         {event.title}
                       </h4>
-                      <p className="text-xs text-[#7A8494] line-clamp-2 mb-2 font-jakarta leading-relaxed">
+                      <p className="text-[11px] sm:text-xs text-[#7A8494] line-clamp-2 mb-1.5 sm:mb-2 font-jakarta leading-relaxed">
                         {event.description || "Premium curated experience tailored for unforgettable memories."}
                       </p>
 
                       <button
                         onClick={(e) => { e.stopPropagation(); onNavigate('booking', event.title) }}
-                        className="w-fit bg-transparent hover:bg-black hover:text-white text-black px-4 py-2 rounded-[10px] border border-black font-jakarta font-bold text-xs transition-all flex items-center gap-1.5 mt-3"
+                        className="w-fit bg-transparent hover:bg-black hover:text-white text-black px-4 py-2 rounded-[10px] border border-black font-jakarta font-bold text-xs transition-all flex items-center gap-1.5 mt-2 sm:mt-3"
                       >
                         Book Event
                         <svg className="w-3.5 h-3.5 text-current group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
@@ -394,4 +484,3 @@ export default function EventsGrid({ onNavigate, hideHeader }: EventsGridProps) 
     </section>
   )
 }
-

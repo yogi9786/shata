@@ -44,7 +44,7 @@ export default function ContactUsPage({}: ContactUsPageProps) {
   }
 
   return (
-    <div className="min-h-screen bg-slate-50 font-jakarta pb-20">
+    <div className="min-h-screen bg-transparent font-jakarta pb-20">
       {/* ─── Premium Banner Section ─── */}
       <div className="relative h-[200px] sm:h-[250px] w-full overflow-hidden flex flex-col justify-center px-4 sm:px-6">
         <div className="absolute inset-0 z-0 bg-[#fba14d] overflow-hidden">

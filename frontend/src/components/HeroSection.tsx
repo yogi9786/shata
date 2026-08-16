@@ -151,7 +151,7 @@ export default function HeroSection({ onNavigate }: HeroSectionProps) {
   return (
     <section
       id="hero"
-      className="relative w-full min-h-screen overflow-hidden flex items-center justify-center py-4 sm:py-8 lg:py-4 px-2.5 sm:px-6 lg:px-8 bg-[#FCFAF7]"
+      className="relative w-full min-h-screen overflow-hidden flex items-center justify-center py-4 sm:py-8 lg:py-4 px-2.5 sm:px-6 lg:px-8 bg-[#FFF8F3]"
     >
       {/* ── Extremely Subtle Warm Decorative Radial Glows ── */}
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
@@ -348,10 +348,10 @@ export default function HeroSection({ onNavigate }: HeroSectionProps) {
 
             {/* Nav text right side — lg screens only */}
             <div className="hidden lg:flex items-center gap-4 ml-3 flex-shrink-0">
-              <a href="http://localhost:3000/" className="text-[10px] font-semibold tracking-wide text-black hover:opacity-80 transition-colors">HOME</a>
-              <a href="http://localhost:3000/events" className="text-[10px] font-semibold tracking-wide text-black hover:opacity-80 transition-colors">EVENTS</a>
-              <a href="http://localhost:3000/why-shata" className="text-[10px] font-semibold tracking-wide text-black hover:opacity-80 transition-colors">WHY SHATA</a>
-              <a href="http://localhost:3000/contact" className="text-[10px] font-semibold tracking-wide text-black hover:opacity-80 transition-colors">CONTACT US</a>
+              <button onClick={() => onNavigate('home')} className="text-[10px] font-semibold tracking-wide text-black hover:opacity-80 transition-colors bg-transparent border-0 cursor-pointer p-0 focus:outline-none">HOME</button>
+              <button onClick={() => onNavigate('events')} className="text-[10px] font-semibold tracking-wide text-black hover:opacity-80 transition-colors bg-transparent border-0 cursor-pointer p-0 focus:outline-none">EVENTS</button>
+              <button onClick={() => onNavigate('why-shata')} className="text-[10px] font-semibold tracking-wide text-black hover:opacity-80 transition-colors bg-transparent border-0 cursor-pointer p-0 focus:outline-none">WHY SHATA</button>
+              <button onClick={() => onNavigate('contact')} className="text-[10px] font-semibold tracking-wide text-black hover:opacity-80 transition-colors bg-transparent border-0 cursor-pointer p-0 focus:outline-none">CONTACT US</button>
               <a
                 href={PARTNER_URL}
                 target="_blank"
@@ -416,36 +416,36 @@ export default function HeroSection({ onNavigate }: HeroSectionProps) {
                 {/* ---- In-browser NAV ROW with icons (Mobile) — centered pill row ---- */}
                 <nav className="lg:hidden flex flex-wrap items-center justify-center gap-x-3 gap-y-2 mb-3 sm:mb-5 pb-3 border-b border-black/15 transition-colors text-center">
                   {/* Home */}
-                  <a href="http://localhost:3000/" className="flex items-center gap-1 sm:gap-1.5 text-[9.5px] sm:text-[11px] font-semibold tracking-wide text-black hover:opacity-80 transition-colors">
+                  <button onClick={() => onNavigate('home')} className="flex items-center gap-1 sm:gap-1.5 text-[9.5px] sm:text-[11px] font-semibold tracking-wide text-black hover:opacity-80 transition-colors bg-transparent border-0 cursor-pointer p-0 focus:outline-none">
                     <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                       <path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1V9.5z" strokeLinejoin="round" />
                       <path d="M9 21V12h6v9" strokeLinejoin="round" />
                     </svg>
                     HOME
-                  </a>
+                  </button>
                   {/* Events */}
-                  <a href="http://localhost:3000/events" className="flex items-center gap-1 sm:gap-1.5 text-[9.5px] sm:text-[11px] font-semibold tracking-wide text-black hover:opacity-80 transition-colors">
+                  <button onClick={() => onNavigate('events')} className="flex items-center gap-1 sm:gap-1.5 text-[9.5px] sm:text-[11px] font-semibold tracking-wide text-black hover:opacity-80 transition-colors bg-transparent border-0 cursor-pointer p-0 focus:outline-none">
                     <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                       <rect x="3" y="4" width="18" height="18" rx="2" />
                       <path d="M16 2v4M8 2v4M3 10h18" strokeLinecap="round" />
                     </svg>
                     EVENTS
-                  </a>
+                  </button>
                   {/* Why Shata */}
-                  <a href="http://localhost:3000/why-shata" className="flex items-center gap-1 sm:gap-1.5 text-[9.5px] sm:text-[11px] font-semibold tracking-wide text-black hover:opacity-80 transition-colors">
+                  <button onClick={() => onNavigate('why-shata')} className="flex items-center gap-1 sm:gap-1.5 text-[9.5px] sm:text-[11px] font-semibold tracking-wide text-black hover:opacity-80 transition-colors bg-transparent border-0 cursor-pointer p-0 focus:outline-none">
                     <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                       <circle cx="12" cy="12" r="10" />
                       <path d="M12 16v-4M12 8h.01" strokeLinecap="round" />
                     </svg>
                     WHY SHATA
-                  </a>
+                  </button>
                   {/* Contact */}
-                  <a href="http://localhost:3000/contact" className="flex items-center gap-1 sm:gap-1.5 text-[9.5px] sm:text-[11px] font-semibold tracking-wide text-black hover:opacity-80 transition-colors">
+                  <button onClick={() => onNavigate('contact')} className="flex items-center gap-1 sm:gap-1.5 text-[9.5px] sm:text-[11px] font-semibold tracking-wide text-black hover:opacity-80 transition-colors bg-transparent border-0 cursor-pointer p-0 focus:outline-none">
                     <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                       <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" strokeLinejoin="round" />
                     </svg>
                     CONTACT US
-                  </a>
+                  </button>
                   {/* Partner */}
                   <a
                     href={PARTNER_URL}

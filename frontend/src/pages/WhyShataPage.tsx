@@ -7,7 +7,7 @@ interface WhyShataPageProps {
 
 export default function WhyShataPage({}: WhyShataPageProps) {
   return (
-    <div className="min-h-screen bg-slate-50">
+    <div className="min-h-screen bg-transparent">
       {/* ─── Premium Banner Section ─── */}
       <div className="relative h-[400px] sm:h-[500px] w-full overflow-hidden flex flex-col justify-center px-4 sm:px-6">
         <div className="absolute inset-0 z-0 bg-[#fba14d] overflow-hidden">
