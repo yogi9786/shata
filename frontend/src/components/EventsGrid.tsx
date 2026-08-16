@@ -29,6 +29,7 @@ interface MockServiceItem {
   reviewsCount: number
   description: string
   image: string
+  date: string
   tag?: string
 }
 
@@ -42,6 +43,7 @@ const photographyItems: MockServiceItem[] = [
     rating: 4.98,
     reviewsCount: 240,
     tag: "Romance & Art",
+    date: "2025-02-14",
     description: "Capture your love story with breathtaking cinematic videos and premium beachfront portraiture.",
     image: proposalImg,
   },
@@ -53,6 +55,7 @@ const photographyItems: MockServiceItem[] = [
     rating: 4.99,
     reviewsCount: 512,
     tag: "Eternal Memories",
+    date: "2025-03-20",
     description: "High-end traditional and candid coverage with custom luxury photo albums and cinematic trailers.",
     image: familyFunctionsImg,
   },
@@ -64,6 +67,7 @@ const photographyItems: MockServiceItem[] = [
     rating: 4.91,
     reviewsCount: 88,
     tag: "Professional AV",
+    date: "2025-04-10",
     description: "High-definition multi-camera live streaming, highlight reels, and professional delegate portraits.",
     image: corporateImg,
   }
@@ -79,6 +83,7 @@ const cateringItems: MockServiceItem[] = [
     rating: 4.99,
     reviewsCount: 310,
     tag: "Heritage Feast",
+    date: "2025-05-15",
     description: "Experience authentic royal heritage delicacies prepared by master khansamas.",
     image: anniversaryImg,
   },
@@ -90,6 +95,7 @@ const cateringItems: MockServiceItem[] = [
     rating: 4.94,
     reviewsCount: 175,
     tag: "Interactive Dining",
+    date: "2025-06-01",
     description: "Global fusion stations, live teppanyaki, wood-fired artisanal pizzas, and custom dessert bars.",
     image: preReleaseImg,
   },
@@ -101,6 +107,7 @@ const cateringItems: MockServiceItem[] = [
     rating: 4.88,
     reviewsCount: 142,
     tag: "Visual Drinks",
+    date: "2025-06-20",
     description: "Exotic fruit mocktails, dry ice infusions, and visual molecular mixology counters.",
     image: publicEventsImg,
   }

@@ -7,7 +7,7 @@ export interface EventItem {
   rating: number
   reviewsCount: number
   price?: string
-  tag: string
+  tag?: string
   badge?: string
   description: string
   fullDescription?: string
