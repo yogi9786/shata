@@ -485,21 +485,23 @@ export default function HeroSection({ onNavigate }: HeroSectionProps) {
                       {/* Primary CTA Button */}
                       <button
                         onClick={() => onNavigate('booking')}
-                        className="flex-1 sm:flex-initial group relative px-4 sm:px-8 py-3 sm:py-3.5 rounded-[14px] font-bold overflow-hidden transition-all duration-[220ms] ease-out shadow-[0_8px_24px_rgba(0,0,0,0.16)] hover:shadow-[0_12px_28px_rgba(0,0,0,0.28)] bg-black hover:bg-[#1a1a1a] hover:-translate-y-[2px] active:scale-95 cursor-pointer text-white border-none text-center"
+                        className="flex-1 sm:flex-initial px-5 sm:px-8 py-3 sm:py-3.5 bg-black border-none text-white font-bold tracking-tight rounded-none shadow-[4px_4px_0px_#E86F32] hover:translate-x-[4px] hover:translate-y-[4px] hover:shadow-none transition-all duration-150 ease-in-out cursor-pointer text-center"
                       >
-                        <span className="relative z-10 flex items-center justify-center gap-1.5 sm:gap-2 font-jakarta text-xs sm:text-sm whitespace-nowrap">
+                        <span className="flex items-center justify-center gap-1.5 sm:gap-2 font-jakarta text-xs sm:text-sm whitespace-nowrap">
                           Book an Event
-                          <span className="transition-transform duration-[220ms] group-hover:translate-x-1">→</span>
+                          <span>→</span>
                         </span>
                       </button>
 
                       {/* Secondary CTA Button */}
                       <button
                         onClick={() => onNavigate('events')}
-                        className="flex-1 sm:flex-initial group px-4 sm:px-6 py-3 sm:py-3.5 rounded-[14px] font-semibold border border-black/15 bg-[#FFFFFF] hover:bg-black text-[#344054] hover:text-white hover:border-black hover:-translate-y-[2px] hover:shadow-[0_6px_20px_rgba(0,0,0,0.15)] transition-all duration-[220ms] ease-out flex items-center justify-center gap-1.5 sm:gap-2 cursor-pointer font-jakarta text-xs sm:text-sm text-center whitespace-nowrap"
+                        className="flex-1 sm:flex-initial px-4 sm:px-6 py-3 sm:py-3.5 bg-white border border-black text-[#344054] font-bold tracking-tight rounded-none shadow-[4px_4px_0px_#000000] hover:translate-x-[4px] hover:translate-y-[4px] hover:shadow-none transition-all duration-150 ease-in-out cursor-pointer text-center"
                       >
-                        Browse Venues
-                        <span className="transition-transform duration-[220ms] group-hover:translate-x-0.5 group-hover:-translate-y-0.5">↗</span>
+                        <span className="flex items-center justify-center gap-1.5 sm:gap-2 font-jakarta text-xs sm:text-sm whitespace-nowrap">
+                          Browse Venues
+                          <span>↗</span>
+                        </span>
                       </button>
                     </div>
                   </div>
@@ -508,7 +510,7 @@ export default function HeroSection({ onNavigate }: HeroSectionProps) {
                 {/* ==================================================== */}
                 {/* FLOATING SEARCH BAR                                  */}
                 {/* ==================================================== */}
-                <div className="w-full rounded-[16px] sm:rounded-[18px] p-2 sm:p-2.5 bg-transparent border-2 border-[#E86F32] shadow-[0_10px_30px_rgba(232,111,50,0.06)] flex flex-col sm:flex-row items-stretch sm:items-center gap-2 mb-4 sm:mb-8 lg:mb-6 transition-all duration-[220ms]">
+                <div className="w-full rounded-[16px] sm:rounded-[18px] p-2 sm:p-2.5 bg-[#FFF1E8] border-2 border-[#E86F32] shadow-[0_10px_30px_rgba(232,111,50,0.06)] flex flex-col sm:flex-row items-stretch sm:items-center gap-2 mb-4 sm:mb-8 lg:mb-6 transition-all duration-[220ms]">
                   {/* Location field */}
                   <div className="flex-1 flex items-center gap-3 px-3.5 py-2.5 rounded-xl bg-transparent border border-black/10 sm:border-r sm:border-y-0 sm:border-l-0 sm:rounded-none sm:bg-transparent sm:border-r-black/10 transition-colors">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" className="flex-shrink-0 stroke-[#E86F32]" strokeWidth="2.2">
@@ -569,7 +571,7 @@ export default function HeroSection({ onNavigate }: HeroSectionProps) {
                   {/* Search Button */}
                   <button
                     onClick={() => onNavigate('events')}
-                    className="flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-3.5 rounded-[12px] font-bold text-sm transition-all duration-[220ms] ease-out active:scale-95 cursor-pointer bg-[#E86F32] hover:bg-[#D96129] hover:scale-[1.02] text-white shadow-[0_6px_20px_rgba(232,111,50,0.25)]"
+                    className="flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-3.5 bg-[#E86F32] hover:bg-[#D96129] text-white font-bold text-sm rounded-none shadow-[4px_4px_0px_#000000] hover:translate-x-[4px] hover:translate-y-[4px] hover:shadow-none transition-all duration-150 ease-in-out cursor-pointer"
                   >
                     <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="text-white">
                       <circle cx="11" cy="11" r="7" />
