@@ -42,15 +42,117 @@ export default function EventsGrid({ onNavigate, hideHeader }: EventsGridProps) 
   const { events: featuredEvents, loading } = useEvents()
   const [selectedCategory, setSelectedCategory] = useState<string>('All')
   const [searchQuery, setSearchQuery] = useState('')
+  const [isPaused, setIsPaused] = useState(false)
+
+  const categories = useMemo(() => {
+    return ['All', ...Array.from(new Set(featuredEvents.map((item) => item.category)))]
+  }, [featuredEvents])
+
+  const filteredEvents = useMemo(() => {
+    return featuredEvents.filter((item) => {
+      const matchCat = selectedCategory === 'All' || item.category === selectedCategory
+      const matchSearch =
+        item.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        item.location.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        item.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        (item.tag || '').toLowerCase().includes(searchQuery.toLowerCase())
+      return matchCat && matchSearch
+    })
+  }, [selectedCategory, searchQuery, featuredEvents])
 
   const scrollContainerRef = useRef<HTMLDivElement>(null)
   const scrollIntervalRef = useRef<number | null>(null)
+  const scrollAnimationRef = useRef<number | null>(null)
 
   const stopScroll = () => {
     if (scrollIntervalRef.current) {
       cancelAnimationFrame(scrollIntervalRef.current)
       scrollIntervalRef.current = null
     }
+    if (scrollAnimationRef.current) {
+      cancelAnimationFrame(scrollAnimationRef.current)
+      scrollAnimationRef.current = null
+      
+      // Restore snap type if container exists
+      if (scrollContainerRef.current) {
+        scrollContainerRef.current.style.scrollSnapType = ''
+        scrollContainerRef.current.style.scrollBehavior = ''
+      }
+    }
+  }
+
+  const smoothScrollTo = (element: HTMLDivElement, target: number, duration: number) => {
+    if (scrollAnimationRef.current) {
+      cancelAnimationFrame(scrollAnimationRef.current)
+    }
+
+    const start = element.scrollLeft
+    const change = target - start
+    let startTime: number | null = null
+    
+    const originalSnapType = element.style.scrollSnapType
+    const originalScrollBehavior = element.style.scrollBehavior
+    
+    element.style.scrollSnapType = 'none'
+    element.style.scrollBehavior = 'auto'
+
+    const animateScroll = (currentTime: number) => {
+      if (startTime === null) startTime = currentTime
+      const timeElapsed = currentTime - startTime
+      const progress = Math.min(timeElapsed / duration, 1)
+      
+      // Easing function: easeInOutCubic
+      const ease = progress < 0.5
+        ? 4 * progress * progress * progress
+        : 1 - Math.pow(-2 * progress + 2, 3) / 2
+
+      element.scrollLeft = start + change * ease
+
+      if (timeElapsed < duration) {
+        scrollAnimationRef.current = requestAnimationFrame(animateScroll)
+      } else {
+        element.style.scrollSnapType = originalSnapType
+        element.style.scrollBehavior = originalScrollBehavior
+        scrollAnimationRef.current = null
+      }
+    }
+
+    scrollAnimationRef.current = requestAnimationFrame(animateScroll)
+  }
+
+  const scrollPrev = () => {
+    const container = scrollContainerRef.current
+    if (!container) return
+    const card = container.firstElementChild as HTMLElement
+    if (!card) return
+    const cardWidth = card.clientWidth
+    const gap = 24 // gap-6 is 24px
+    const step = cardWidth + gap
+    
+    let target = container.scrollLeft - step
+    if (target < 0) {
+      // Loop back to the end
+      target = container.scrollWidth - container.clientWidth
+    }
+    smoothScrollTo(container, target, 750) // Smooth responsive scroll (750ms)
+  }
+
+  const scrollNext = () => {
+    const container = scrollContainerRef.current
+    if (!container) return
+    const card = container.firstElementChild as HTMLElement
+    if (!card) return
+    const cardWidth = card.clientWidth
+    const gap = 24 // gap-6 is 24px
+    const step = cardWidth + gap
+    
+    let target = container.scrollLeft + step
+    const maxScroll = container.scrollWidth - container.clientWidth
+    if (target >= maxScroll + 10) {
+      // Loop back to the start
+      target = 0
+    }
+    smoothScrollTo(container, target, 750) // Smooth responsive scroll (750ms)
   }
 
   const startScroll = (direction: 'left' | 'right', speed: number) => {
@@ -93,21 +195,18 @@ export default function EventsGrid({ onNavigate, hideHeader }: EventsGridProps) 
     return () => stopScroll()
   }, [])
 
-  const categories = useMemo(() => {
-    return ['All', ...Array.from(new Set(featuredEvents.map((item) => item.category)))]
-  }, [featuredEvents])
+  // Auto-scrolling effect when not hovered or touched
+  useEffect(() => {
+    if (isPaused || loading || filteredEvents.length <= 1) return
 
-  const filteredEvents = useMemo(() => {
-    return featuredEvents.filter((item) => {
-      const matchCat = selectedCategory === 'All' || item.category === selectedCategory
-      const matchSearch =
-        item.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        item.location.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        item.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        item.tag.toLowerCase().includes(searchQuery.toLowerCase())
-      return matchCat && matchSearch
-    })
-  }, [selectedCategory, searchQuery, featuredEvents])
+    const interval = setInterval(() => {
+      scrollNext()
+    }, 3200) // Smooth scroll transition every 3.2 seconds
+
+    return () => clearInterval(interval)
+  }, [isPaused, loading, filteredEvents.length])
+
+
 
   return (
     <section id="events-grid" className="w-full bg-[#FFF8F3] font-jakarta relative py-12 sm:py-20 overflow-hidden">
@@ -206,10 +305,47 @@ export default function EventsGrid({ onNavigate, hideHeader }: EventsGridProps) 
           <LogoLoader text="Loading Experiences..." />
         ) : (
           <div className="relative -mx-4 sm:mx-0">
+            {filteredEvents.length > 0 && (
+              <>
+                {/* Left Arrow Icon - Large Screen Only */}
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    scrollPrev()
+                  }}
+                  className="hidden lg:flex absolute -left-4 top-1/2 -translate-y-1/2 z-30 w-8 h-8 rounded-full bg-white/95 hover:bg-white border border-black/10 hover:border-black/30 shadow-md items-center justify-center text-black hover:scale-110 active:scale-95 transition-all duration-200 cursor-pointer"
+                  aria-label="Previous event"
+                >
+                  <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+                  </svg>
+                </button>
+                {/* Right Arrow Icon - Large Screen Only */}
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    scrollNext()
+                  }}
+                  className="hidden lg:flex absolute -right-4 top-1/2 -translate-y-1/2 z-30 w-8 h-8 rounded-full bg-white/95 hover:bg-white border border-black/10 hover:border-black/30 shadow-md items-center justify-center text-black hover:scale-110 active:scale-95 transition-all duration-200 cursor-pointer"
+                  aria-label="Next event"
+                >
+                  <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                  </svg>
+                </button>
+              </>
+            )}
+
             <div 
               ref={scrollContainerRef}
               onMouseMove={handleMouseMove}
-              onMouseLeave={handleMouseLeave}
+              onMouseLeave={() => {
+                handleMouseLeave()
+                setIsPaused(false)
+              }}
+              onMouseEnter={() => setIsPaused(true)}
+              onTouchStart={() => setIsPaused(true)}
+              onTouchEnd={() => setIsPaused(false)}
               className="flex gap-6 overflow-x-auto no-scrollbar py-6 px-4 sm:px-4 snap-x snap-mandatory scroll-smooth w-full"
             >
               {filteredEvents.map((event) => {

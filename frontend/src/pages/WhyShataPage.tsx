@@ -1,6 +1,5 @@
 import type { PageType } from '../App'
-import BookingBenefits from '../components/BookingBenefits'
-import ServicesGrid from '../components/ServicesGrid'
+import WhyChooseShata from '../components/WhyChooseShata'
 
 interface WhyShataPageProps {
   onNavigate?: (page: PageType, context?: string | number) => void
@@ -36,8 +35,7 @@ export default function WhyShataPage({}: WhyShataPageProps) {
       </div>
 
       <div className="pb-20">
-        <BookingBenefits hideHeader={true} />
-        <ServicesGrid />
+        <WhyChooseShata />
       </div>
     </div>
   )

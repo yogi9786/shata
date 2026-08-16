@@ -10,9 +10,10 @@ import EventDetailsPage from './pages/EventDetailsPage'
 import EventsPage from './pages/EventsPage'
 import WhyShataPage from './pages/WhyShataPage'
 import ContactUsPage from './pages/ContactUsPage'
+import CareersPage from './pages/CareersPage'
 import Footer from './components/Footer'
 
-export type PageType = 'home' | 'booking' | 'success' | 'checkout' | 'event-details' | 'events' | 'why-shata' | 'contact'
+export type PageType = 'home' | 'booking' | 'success' | 'checkout' | 'event-details' | 'events' | 'why-shata' | 'contact' | 'careers'
 
 interface BookingDetails {
   eventType: string
@@ -210,6 +211,9 @@ function App() {
             )}
             {currentPage === 'contact' && (
               <ContactUsPage onNavigate={handleNavigate} />
+            )}
+            {currentPage === 'careers' && (
+              <CareersPage onNavigate={handleNavigate} />
             )}
           </main>
         </div>
